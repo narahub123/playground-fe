@@ -1,10 +1,12 @@
+import ColorModeButton from "@/components/ColorModeButton/ColorModeButton";
 import { Outlet } from "react-router-dom";
 
 const DefaultLayout = () => {
   return (
-    <div className="default-layout">
+    <>
+      <ColorModeButton />
       <Outlet />
-    </div>
+    </>
   );
 };
 
