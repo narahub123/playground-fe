@@ -1,8 +1,11 @@
 import { AuthButton, HorizontalDivider } from "@/components";
 import "./AuthPage.css";
 import { google, kakao, naver } from "@/assets";
+import { useDocumentTitle } from "@/hooks";
 
 const AuthPage = () => {
+  useDocumentTitle("안녕하세요 PlayGround입니다.");
+
   return (
     <div className="auth-page">
       <div className="auth-page-container">
