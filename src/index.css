@@ -1,5 +1,9 @@
 @import url("./reset.css");
 
+:root {
+  --text-border: red;
+}
+
 /* body 스타일 */
 body {
   max-width: 1280px;
