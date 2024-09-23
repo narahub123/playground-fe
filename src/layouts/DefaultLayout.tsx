@@ -1,4 +1,3 @@
-import { ColorModeButton } from "@/components";
 import { changeLanguage } from "@/store/slices/settingsSlice";
 import { RootState } from "@/store/store";
 import { useEffect } from "react";
