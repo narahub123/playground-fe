@@ -1,1 +1,3 @@
-export {};
+import useDocumentTitle from "./useDocumentTitle";
+
+export { useDocumentTitle };
