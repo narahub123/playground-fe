@@ -1,7 +1,7 @@
 @import url("./reset.css");
 
 :root {
-  --text-border: red;
+  --layout-border: red;
 }
 
 /* body 스타일 */
@@ -16,5 +16,5 @@ body {
 /* 변경 예정 */
 :focus {
   outline: 2px solid #005fcc; /* 사용자 정의 색상 */
-  outline-offset: 2px;
+  outline-offset: 1px;
 }

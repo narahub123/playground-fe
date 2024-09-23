@@ -1,0 +1,13 @@
+.horizontal-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.horizontal-divider-line {
+  border-bottom: 2px solid #ccc;
+  flex: 1;
+}
+.horizontal-divider-text {
+  font-size: 14px;
+}

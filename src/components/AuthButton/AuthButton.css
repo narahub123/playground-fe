@@ -1,0 +1,24 @@
+.auth-button {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 10px;
+  background-color: transparent;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* hover 시 기본 색상 */
+.auth-button:hover {
+  background-color: #eeeeee70;
+}
+
+.auth-button-text {
+  font-weight: bold;
+}
+.auth-button-image {
+  width: 20px;
+  height: 20px;
+}
