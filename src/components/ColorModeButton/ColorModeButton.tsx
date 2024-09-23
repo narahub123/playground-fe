@@ -1,9 +1,15 @@
+import { RootState } from "@/store/store";
 import styles from "./ColorModeButton.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MdOutlineLightMode, MdOutlineDarkMode } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { changeColorTheme } from "@/store/slices/settingsSlice";
 
 const ColorModeButton = () => {
-  const [colorTheme, setColorTheme] = useState("light");
+  const dispatch = useDispatch();
+  const colorTheme = useSelector(
+    (state: RootState) => state.settings.colorTheme
+  );
 
   // colorTheme 변경에 따라 html color-theme 속성 변경
   useEffect(() => {
@@ -18,10 +24,10 @@ const ColorModeButton = () => {
   // 색상 모드 변경 핸들러
   const handleClick = () => {
     if (colorTheme === "light") {
-      setColorTheme("dark");
+      dispatch(changeColorTheme("dark"));
     }
     if (colorTheme === "dark") {
-      setColorTheme("light");
+      dispatch(changeColorTheme("light"));
     }
   };
 
