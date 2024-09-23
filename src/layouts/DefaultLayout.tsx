@@ -1,4 +1,4 @@
-import ColorModeButton from "@/components/ColorModeButton/ColorModeButton";
+import { ColorModeButton } from "@/components";
 import { Outlet } from "react-router-dom";
 
 const DefaultLayout = () => {
