@@ -8,10 +8,10 @@ const ColorModeButton = () => {
   // colorTheme 변경에 따라 html color-theme 속성 변경
   useEffect(() => {
     if (colorTheme === "light") {
-      document.documentElement.setAttribute("color-theme", "dark");
+      document.documentElement.setAttribute("color-theme", "light");
     }
     if (colorTheme === "dark") {
-      document.documentElement.setAttribute("color-theme", "light");
+      document.documentElement.setAttribute("color-theme", "dark");
     }
   }, [colorTheme]);
 
@@ -28,9 +28,15 @@ const ColorModeButton = () => {
   return (
     <i className={styles.button} onClick={() => handleClick()}>
       {colorTheme === "light" ? (
-        <MdOutlineDarkMode className={`${styles.icon} icon`} />
+        <MdOutlineDarkMode
+          className={`${styles.icon} icon`}
+          title="어두운 색상"
+        />
       ) : (
-        <MdOutlineLightMode className={`${styles.icon} icon`} />
+        <MdOutlineLightMode
+          className={`${styles.icon} icon`}
+          title="밝은 색상"
+        />
       )}
     </i>
   );
