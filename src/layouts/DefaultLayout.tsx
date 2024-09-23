@@ -4,6 +4,7 @@ import { RootState } from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
 
 const DefaultLayout = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const DefaultLayout = () => {
 
   return (
     <>
-      <ColorModeButton />
+      <SettingButtonsLayout />
       <Outlet />
     </>
   );
