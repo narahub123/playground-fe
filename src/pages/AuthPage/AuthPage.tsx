@@ -1,12 +1,12 @@
 import { AuthButton, HorizontalDivider } from "@/components";
 import "./AuthPage.css";
 import { google, kakao, naver } from "@/assets";
-import { useDocumentTitle } from "@/hooks";
+import { useDocumentTitle, useFocusTrap } from "@/hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { langObj } from "@/data/language/language.data";
+import { langObj } from "@/data/language/language";
 import { AuthModal } from "@/features/authentication/components";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AuthPage = () => {
   const lang = useSelector((state: RootState) => state.settings.language);
@@ -14,6 +14,18 @@ const AuthPage = () => {
   const [openModal, setOpenModal] = useState(false);
 
   useDocumentTitle(langText.htmlTitle);
+
+  // 마지막 포커스 요소 설정
+  const { setLastFocusable } = useFocusTrap();
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    setLastFocusable(buttonRef.current);
+
+    return () => {
+      setLastFocusable(null);
+    };
+  }, [setLastFocusable]);
 
   return (
     <div className="auth-page">
@@ -50,6 +62,7 @@ const AuthPage = () => {
               imgUrl={""}
               label={langText.loginLabel}
               color="cornflowerblue"
+              ref={buttonRef}
             />
           </div>
         </section>

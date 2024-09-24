@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
+import { FocusTrapProvider } from "@/contexts";
 
 const DefaultLayout = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,10 @@ const DefaultLayout = () => {
   }, []);
 
   return (
-    <>
+    <FocusTrapProvider>
       <SettingButtonsLayout />
       <Outlet />
-    </>
+    </FocusTrapProvider>
   );
 };
 
