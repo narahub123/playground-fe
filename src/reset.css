@@ -179,3 +179,13 @@ button {
   color: inherit;
   background-color: inherit;
 }
+
+select {
+  color: var(--color);
+  background-color: var(--background);
+}
+
+option {
+  color: var(--color);
+  background-color: var(--background);
+}
