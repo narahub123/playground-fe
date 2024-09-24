@@ -17,7 +17,11 @@ const LanguageButton = () => {
   };
 
   return (
-    <select className={`${styles.title}`} onChange={handleClick}>
+    <select
+      className={`${styles.title}`}
+      onChange={handleClick}
+      aria-label="언어 설정하기"
+    >
       {languageList.map((item) => (
         <option key={item.code} className={styles.item} value={item.code}>
           {item.ownName}
