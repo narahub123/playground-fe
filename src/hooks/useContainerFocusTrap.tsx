@@ -1,4 +1,20 @@
-import { useEffect, RefObject, useRef } from "react";
+/**
+ * useContainerFocusTrap 훅은 특정 컨테이너 내에서 포커스를 트랩합니다.
+ *
+ * @param shouldTrap - 포커스를 트랩할지 여부
+ * @param containerRef - 포커스를 트랩할 컨테이너의 Ref
+ * @param firstFocusableRef - 첫 번째 포커스 가능한 요소의 Ref
+ * @param lastFocusableRef - 마지막 포커스 가능한 요소의 Ref
+ *
+ * @example
+ * const containerRef = useRef<HTMLDivElement>(null);
+ * const firstFocusableRef = useRef<HTMLButtonElement>(null);
+ * const lastFocusableRef = useRef<HTMLButtonElement>(null);
+ *
+ * useContainerFocusTrap(isModalOpen, containerRef, firstFocusableRef, lastFocusableRef);
+ */
+
+import { useEffect, RefObject } from "react";
 import useFocusTrap from "./useFocusTrap";
 
 const useContainerFocusTrap = (
