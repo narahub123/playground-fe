@@ -1,4 +1,4 @@
-import { useEffect, RefObject } from "react";
+import { useEffect, RefObject, useRef } from "react";
 import useFocusTrap from "./useFocusTrap";
 
 const useContainerFocusTrap = (
@@ -7,10 +7,12 @@ const useContainerFocusTrap = (
   firstFocusableRef: RefObject<HTMLElement | null>,
   lastFocusableRef: RefObject<HTMLElement | null>
 ) => {
-  const { setFirstFocusable, setLastFocusable } = useFocusTrap();
+  const { setFirstFocusable, setLastFocusable, setIsContainerFocusTrap } =
+    useFocusTrap();
 
   useEffect(() => {
     if (shouldTrap) {
+      setIsContainerFocusTrap(true);
       // 모달 외부의 포커스 가능한 요소 가져오기
       const focusableElementsOutsideModal = Array.from(
         document.querySelectorAll(
@@ -36,6 +38,8 @@ const useContainerFocusTrap = (
         focusableElementsOutsideModal.forEach((el) =>
           el.removeAttribute("tabIndex")
         );
+
+        setIsContainerFocusTrap(false);
       };
     }
   }, [

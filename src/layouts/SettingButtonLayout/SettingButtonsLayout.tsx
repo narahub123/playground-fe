@@ -4,17 +4,19 @@ import { useEffect, useRef } from "react";
 import { useFocusTrap } from "@/hooks";
 
 const SettingButtonsLayout = () => {
-  const { setFirstFocusable } = useFocusTrap();
+  const { setFirstFocusable, isContainerFocusTrap } = useFocusTrap();
   const colorButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
+    if (isContainerFocusTrap) return;
+
     setFirstFocusable(colorButtonRef.current);
 
     return () => {
       // 컴포넌트가 언마운트될 때 포커스 설정을 해제합니다.
       setFirstFocusable(null);
     };
-  }, [setFirstFocusable]);
+  }, [setFirstFocusable, isContainerFocusTrap]);
 
   return (
     <div className={styles.container}>

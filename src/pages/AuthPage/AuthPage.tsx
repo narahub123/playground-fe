@@ -16,16 +16,17 @@ const AuthPage = () => {
   useDocumentTitle(langText.htmlTitle);
 
   // 마지막 포커스 요소 설정
-  const { setLastFocusable } = useFocusTrap();
+  const { setLastFocusable, isContainerFocusTrap } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
+    if (isContainerFocusTrap) return;
     setLastFocusable(buttonRef.current);
 
     return () => {
       setLastFocusable(null);
     };
-  }, [setLastFocusable]);
+  }, [setLastFocusable, isContainerFocusTrap]);
 
   return (
     <div className="auth-page">

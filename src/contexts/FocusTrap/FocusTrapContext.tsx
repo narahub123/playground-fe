@@ -4,6 +4,8 @@ import React, { createContext, useEffect, useRef, useState } from "react";
 interface FocusTrapContextType {
   setFirstFocusable: (ref: HTMLElement | null) => void;
   setLastFocusable: (ref: HTMLElement | null) => void;
+  isContainerFocusTrap: boolean;
+  setIsContainerFocusTrap: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // context 생성하기
@@ -16,6 +18,9 @@ export const FocusTrapContext = createContext<FocusTrapContextType | undefined>(
 export const FocusTrapProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // containerFocusTrap 여부 상태
+  const [isContainerFocusTrap, setIsContainerFocusTrap] = useState(false);
+
   // 첫 번째 포커스 가능한 요소에 대한 참조
   const firstFocusableRef = useRef<HTMLElement | null>(null);
   // 마지막 포커스 가능한 요소에 대한 참조
@@ -64,6 +69,8 @@ export const FocusTrapProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         setFirstFocusable,
         setLastFocusable,
+        isContainerFocusTrap,
+        setIsContainerFocusTrap,
       }}
     >
       {children}
