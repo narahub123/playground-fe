@@ -1,7 +1,7 @@
 @import url("./reset.css");
 
 :root {
-  --layout-border: red;
+  --test: red;
 }
 
 :root[color-theme="light"] {
