@@ -32,7 +32,7 @@ const ColorModeButton = () => {
   };
 
   return (
-    <i className={styles.button} onClick={() => handleClick()}>
+    <i className={styles.button} onClick={() => handleClick()} tabIndex={0}>
       {colorTheme === "light" ? (
         <MdOutlineDarkMode
           className={`${styles.icon} icon`}
