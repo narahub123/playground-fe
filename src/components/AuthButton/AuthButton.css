@@ -7,11 +7,12 @@
   border-radius: 30px;
   padding: 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 /* hover 시 기본 색상 */
 .auth-button:hover {
-  background-color: #ccc;
+  background-color: rgba(237, 237, 237, 0.5);
 }
 
 .auth-button-text {
