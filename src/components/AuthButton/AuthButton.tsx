@@ -35,7 +35,14 @@ const AuthButton = ({
       onMouseEnter={() => handleMouseEnter()}
       onMouseLeave={() => handleMouseLeave()}
     >
-      {imgUrl && <img src={imgUrl} alt="사진" className="auth-button-image" />}
+      {imgUrl && (
+        <img
+          src={imgUrl}
+          alt="사진"
+          className="auth-button-image"
+          aria-hidden // 불필요하게 이미지에 대해 읽는 것 방지
+        />
+      )}
       <p className="auth-button-text">{label}</p>
     </button>
   );

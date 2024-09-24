@@ -16,7 +16,7 @@ const AuthPage = () => {
     <div className="auth-page">
       <div className="auth-page-container">
         <section className="auth-page-item">
-          <p className="auth-page-item-title">{langText.signupTitle}</p>
+          <h2 className="auth-page-item-title">{langText.signupTitle}</h2>
           <div className="auth-page-item-container">
             <AuthButton imgUrl={google} label={langText.googleSignupLabel} />
             <AuthButton imgUrl={naver} label={langText.naverSignupLabel} />
@@ -33,7 +33,7 @@ const AuthPage = () => {
           </div>
         </section>
         <section className="auth-page-item">
-          <p className="auth-page-item-title">{langText.loginTitle}</p>
+          <h2 className="auth-page-item-title">{langText.loginTitle}</h2>
           <div className="auth-page-item-container">
             <AuthButton
               imgUrl={""}
