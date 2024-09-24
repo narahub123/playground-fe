@@ -5,15 +5,20 @@ import { useDocumentTitle } from "@/hooks";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { langObj } from "@/data/language/language.data";
+import { AuthModal } from "@/features/authentication/components";
+import { useState } from "react";
 
 const AuthPage = () => {
   const lang = useSelector((state: RootState) => state.settings.language);
   const langText = langObj[lang as string].auth;
+  const [openModal, setOpenModal] = useState(false);
 
   useDocumentTitle(langText.htmlTitle);
 
   return (
     <div className="auth-page">
+      <AuthModal openModal={openModal} setOpenModal={setOpenModal} />
+
       <div className="auth-page-container">
         <section className="auth-page-item">
           <h2 className="auth-page-item-title">{langText.signupTitle}</h2>
@@ -23,13 +28,19 @@ const AuthPage = () => {
             <AuthButton imgUrl={kakao} label={langText.kakaoSignupLabel} />
 
             <HorizontalDivider text={langText.signupDivider} />
-            <AuthButton
-              imgUrl={""}
-              label={langText.emailSignupLabel}
-              backgroundColor="cornflowerblue"
-              color="white"
-              hoverBackgroundColor="#6394ede6"
-            />
+            {/* 이메일 회원가입 */}
+            <div
+              className="auth-page-btn-wrapper"
+              onClick={() => setOpenModal(true)}
+            >
+              <AuthButton
+                imgUrl={""}
+                label={langText.emailSignupLabel}
+                backgroundColor="cornflowerblue"
+                color="white"
+                hoverBackgroundColor="#6394ede6"
+              />
+            </div>
           </div>
         </section>
         <section className="auth-page-item">
