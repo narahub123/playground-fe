@@ -32,19 +32,27 @@ const ColorModeButton = () => {
   };
 
   return (
-    <i className={styles.button} onClick={() => handleClick()} tabIndex={0}>
+    <button
+      className={styles.button}
+      onClick={handleClick}
+      aria-label={
+        colorTheme === "light" ? "밝은 색상으로 변경" : "어두운 색상으로 변경"
+      }
+    >
       {colorTheme === "light" ? (
         <MdOutlineDarkMode
           className={`${styles.icon} icon`}
-          title="어두운 색상"
+          title="어두운 색상으로 변경"
+          aria-hidden="true"
         />
       ) : (
         <MdOutlineLightMode
           className={`${styles.icon} icon`}
-          title="밝은 색상"
+          title="밝은 색상으로 변경"
+          aria-hidden="true"
         />
       )}
-    </i>
+    </button>
   );
 };
 
