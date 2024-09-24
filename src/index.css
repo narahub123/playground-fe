@@ -7,10 +7,14 @@
 :root[color-theme="light"] {
   --background: #fff;
   --color: #000;
+  --border: 1px solid transparent;
+  --backdrop: rgba(0, 0, 0, 0.3);
 }
 :root[color-theme="dark"] {
   --background: #000;
   --color: #fff;
+  --border: 1px solid #ccc;
+  --backdrop: rgba(100, 148, 237, 0.3);
 }
 
 /* body 스타일 */
