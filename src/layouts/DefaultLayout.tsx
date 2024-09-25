@@ -6,7 +6,7 @@ import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
 import { FocusTrapProvider } from "@/contexts";
 import { AuthPage } from "@/pages";
 
-const AuthLayout = () => {
+const DefaultLayout = () => {
   const dispatch = useDispatch();
   const language = useSelector((state: RootState) => state.settings.language);
 
@@ -20,12 +20,16 @@ const AuthLayout = () => {
     dispatch(changeLanguage(lang));
   }, []);
 
+  const isLogin = false;
   return (
+    // 포커스 트랩 적용
     <FocusTrapProvider>
+      {/* 전역 컴포넌트 */}
       <SettingButtonsLayout />
-      <AuthPage />
+      {/* 로그인 여부 확인해서 페이지 결정 */}
+      {isLogin ? "" : <AuthPage />}
     </FocusTrapProvider>
   );
 };
 
-export default AuthLayout;
+export default DefaultLayout;

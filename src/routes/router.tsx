@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "@/pages/NotFound/NotFound";
 import { AuthModal } from "@/features/authentication/components";
-import AuthLayout from "@/layouts/AuthLayout";
+import Signup from "@/features/authentication/signup/Signup";
+import { DefaultLayout } from "@/layouts";
 
-const login = false;
 export const router = createBrowserRouter([
   {
     path: "*",
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: login ? "" : <AuthLayout />,
+    element: <DefaultLayout />,
     children: [
       {
         path: "flow",
@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "signup",
+            element: <Signup />,
           },
           {
             path: "login",

@@ -10,7 +10,7 @@ import { CONSTANT } from "@/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { setOpenModal } from "@/store/slices/modalSlice";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const AuthModal = () => {
   const dispatch = useDispatch();
@@ -40,6 +40,8 @@ const AuthModal = () => {
   // 모달 밖을 클릭하면 모달창이 닫힘
   useClickOutside(containerRef);
 
+  console.log(openModal);
+
   if (closed) return null;
 
   return (
@@ -60,15 +62,7 @@ const AuthModal = () => {
         >
           <LuX className="icon" />
         </button>
-        <button>호ㅑㅗㅑ</button>
-        <button>akad </button>
-        <span tabIndex={0}>didhifhil d</span>
-        <div
-          tabIndex={0}
-          ref={lastFocusableRef as React.RefObject<HTMLDivElement>}
-        >
-          하이
-        </div>
+        <Outlet />
       </div>
     </div>
   );
