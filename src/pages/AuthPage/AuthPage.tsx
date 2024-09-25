@@ -28,6 +28,15 @@ const AuthPage = () => {
     };
   }, [setLastFocusable, isContainerFocusTrap]);
 
+  // 페이지를 열었을 때 포커스가 걸릴 첫 요소 설정하기
+  const firstRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!firstRef.current) return;
+
+    firstRef.current.focus();
+  }, []);
+
   return (
     <div className="auth-page">
       <AuthModal openModal={openModal} setOpenModal={setOpenModal} />
@@ -36,7 +45,11 @@ const AuthPage = () => {
         <section className="auth-page-item">
           <h2 className="auth-page-item-title">{langText.signupTitle}</h2>
           <div className="auth-page-item-container">
-            <AuthButton imgUrl={google} label={langText.googleSignupLabel} />
+            <AuthButton
+              imgUrl={google}
+              label={langText.googleSignupLabel}
+              ref={firstRef}
+            />
             <AuthButton imgUrl={naver} label={langText.naverSignupLabel} />
             <AuthButton imgUrl={kakao} label={langText.kakaoSignupLabel} />
 

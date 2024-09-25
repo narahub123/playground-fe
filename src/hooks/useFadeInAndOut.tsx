@@ -54,8 +54,6 @@ const useFadeInAndOut = (
   // 너무 짧아서 gif에 담겨지지 않음
   const cssDuration = (duration - 50) / 1000;
 
-  console.log(isFadeIn);
-
   useEffect(() => {
     // 변경 시작
     setAnimate(true);
@@ -158,12 +156,7 @@ const useFadeInAndOut = (
     };
   }, [isFadeIn, visible, duration]);
 
-  console.log("visible", visible);
-  console.log("animate", animate);
-
   const closed = !visible && !animate;
-
-  console.log("모달 닫기", closed);
 
   return { closed };
 };

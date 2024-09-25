@@ -8,8 +8,6 @@ const useClickOutside = (
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      console.log(target);
-
       if (ref.current && !ref.current.contains(target)) {
         setToggle(false);
       }
