@@ -5,27 +5,13 @@
   width: 100%;
   height: 100%;
   background-color: var(--backdrop);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* 변동 */
-  z-index: -1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.open {
-  z-index: 1000;
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  display: none;
 }
 
 .container {
   position: relative;
   width: 80%;
+  max-width: 600px;
   height: 600px;
   background-color: var(--background);
   border-radius: 15px;
