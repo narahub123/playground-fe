@@ -54,6 +54,8 @@ const useFadeInAndOut = (
   // 너무 짧아서 gif에 담겨지지 않음
   const cssDuration = (duration - 50) / 1000;
 
+  console.log(isFadeIn);
+
   useEffect(() => {
     // 변경 시작
     setAnimate(true);
@@ -122,8 +124,6 @@ const useFadeInAndOut = (
 
       // 애니메이션 클래스 제거 타이머: 애니매이션 진행 중일 때 ui 상태 변경 방지
       timerRef.current = setTimeout(() => {
-        // 변경 종료
-        setAnimate(false);
         // 임시 클래스 삭제하기
         if (!containerRef.current) return;
         containerRef.current?.classList.remove(
@@ -140,6 +140,9 @@ const useFadeInAndOut = (
     // 적용시킬 효과와 실제 보이는 것과 일치시킴
     setVisible(isFadeIn);
 
+    // 변경 종료
+    setAnimate(false);
+
     // cleanup 함수
     return () => {
       // useEffect가 완료되면 스타일 시트 제거
@@ -155,7 +158,12 @@ const useFadeInAndOut = (
     };
   }, [isFadeIn, visible, duration]);
 
+  console.log("visible", visible);
+  console.log("animate", animate);
+
   const closed = !visible && !animate;
+
+  console.log("모달 닫기", closed);
 
   return { closed };
 };

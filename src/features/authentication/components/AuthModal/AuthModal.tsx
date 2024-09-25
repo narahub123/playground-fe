@@ -1,7 +1,11 @@
 import { LuX } from "react-icons/lu";
 import styles from "./AuthModal.module.css";
 import { useRef } from "react";
-import { useContainerFocusTrap, useFadeInAndOut } from "@/hooks";
+import {
+  useClickOutside,
+  useContainerFocusTrap,
+  useFadeInAndOut,
+} from "@/hooks";
 import { CONSTANT } from "@/constants";
 
 interface AuthModalProps {
@@ -10,7 +14,7 @@ interface AuthModalProps {
 }
 
 const AuthModal = ({ openModal, setOpenModal }: AuthModalProps) => {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstFocusableRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusableRef = useRef<HTMLButtonElement | null>(null);
@@ -30,6 +34,9 @@ const AuthModal = ({ openModal, setOpenModal }: AuthModalProps) => {
     styles,
     CONSTANT.MODAL_DURATION
   );
+
+  // 모달 밖을 클릭하면 모달창이 닫힘
+  useClickOutside(containerRef, setOpenModal);
 
   if (closed) return null;
 
