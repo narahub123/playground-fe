@@ -41,7 +41,9 @@ const useFadeInAndOut = (
   containerRef: React.MutableRefObject<HTMLElement | null>,
   isFadeIn: boolean, // true: fadeIn 효과 false: fadeOut 효과
   styles: CSSModuleClasses,
-  duration: number = 300
+  duration: number = 300,
+  onComplate?: () => void, // 효과 이후 적용되어야 할 함수가 있는 경우
+  inOrOut?: "in" | "out" // onComplate가 적용될 시기 : in : fadein out: fadeout undefined: 항상
 ) => {
   const [animate, setAnimate] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -133,6 +135,16 @@ const useFadeInAndOut = (
         );
         // animation 스타일 삭제
         containerRef.current.style.removeProperty("animation");
+
+        // 효과 완료 후 적용할 함수
+        if (onComplate) {
+          // fadein에 적용할 때
+          if (inOrOut === "in" && isFadeIn) onComplate();
+          // fade out에 적용할 때
+          else if (inOrOut === "out" && !isFadeIn) onComplate();
+          // 무조건 적용할 때
+          else if (!inOrOut) onComplate();
+        }
       }, duration);
     };
 
@@ -140,6 +152,7 @@ const useFadeInAndOut = (
 
     // 변경 종료
     if (!containerRef.current) setAnimate(false);
+
     // 적용시킬 효과와 실제 보이는 것과 일치시킴
     setVisible(isFadeIn);
 

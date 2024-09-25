@@ -34,13 +34,13 @@ const AuthModal = () => {
     wrapperRef,
     openModal,
     styles,
-    CONSTANT.MODAL_DURATION
+    CONSTANT.MODAL_DURATION,
+    () => navigate("/"),
+    "out"
   );
 
   // 모달 밖을 클릭하면 모달창이 닫힘
   useClickOutside(containerRef);
-
-  console.log(openModal);
 
   if (closed) return null;
 
@@ -56,7 +56,6 @@ const AuthModal = () => {
           className={`${styles.close}`}
           onClick={() => {
             dispatch(setOpenModal(false));
-            navigate("/");
           }}
           ref={firstFocusableRef}
         >
