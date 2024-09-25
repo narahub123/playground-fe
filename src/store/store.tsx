@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { settingsReducer } from "./slices";
+import { modalReducer, settingsReducer } from "./slices";
 
 export const store = configureStore({
-  reducer: { settings: settingsReducer },
+  reducer: { settings: settingsReducer, modal: modalReducer },
   // serializableCheck 옵션을 false로 설정하여,
   // 직렬화 불가능한 데이터(예: 함수, class 인스턴스 등)의 상태 저장 검사를 비활성화
   middleware: (getDefaultMiddleware) =>

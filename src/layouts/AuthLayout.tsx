@@ -2,11 +2,11 @@ import { changeLanguage } from "@/store/slices/settingsSlice";
 import { RootState } from "@/store/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
 import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
 import { FocusTrapProvider } from "@/contexts";
+import { AuthPage } from "@/pages";
 
-const DefaultLayout = () => {
+const AuthLayout = () => {
   const dispatch = useDispatch();
   const language = useSelector((state: RootState) => state.settings.language);
 
@@ -23,9 +23,9 @@ const DefaultLayout = () => {
   return (
     <FocusTrapProvider>
       <SettingButtonsLayout />
-      <Outlet />
+      <AuthPage />
     </FocusTrapProvider>
   );
 };
 
-export default DefaultLayout;
+export default AuthLayout;

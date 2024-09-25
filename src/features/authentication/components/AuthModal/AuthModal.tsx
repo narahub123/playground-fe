@@ -7,17 +7,19 @@ import {
   useFadeInAndOut,
 } from "@/hooks";
 import { CONSTANT } from "@/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { setOpenModal } from "@/store/slices/modalSlice";
+import { useNavigate } from "react-router-dom";
 
-interface AuthModalProps {
-  openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const AuthModal = ({ openModal, setOpenModal }: AuthModalProps) => {
+const AuthModal = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const firstFocusableRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusableRef = useRef<HTMLButtonElement | null>(null);
+  const openModal = useSelector((state: RootState) => state.modal.openModal);
 
   // 포커스 트랩
   useContainerFocusTrap(
@@ -36,7 +38,7 @@ const AuthModal = ({ openModal, setOpenModal }: AuthModalProps) => {
   );
 
   // 모달 밖을 클릭하면 모달창이 닫힘
-  useClickOutside(containerRef, setOpenModal);
+  useClickOutside(containerRef);
 
   if (closed) return null;
 
@@ -50,7 +52,10 @@ const AuthModal = ({ openModal, setOpenModal }: AuthModalProps) => {
       <div className={styles.container} ref={containerRef}>
         <button
           className={`${styles.close}`}
-          onClick={() => setOpenModal(false)}
+          onClick={() => {
+            dispatch(setOpenModal(false));
+            navigate("/");
+          }}
           ref={firstFocusableRef}
         >
           <LuX className="icon" />

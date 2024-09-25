@@ -2,16 +2,19 @@ import { AuthButton, HorizontalDivider } from "@/components";
 import "./AuthPage.css";
 import { google, kakao, naver } from "@/assets";
 import { useDocumentTitle, useFocusTrap } from "@/hooks";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { langObj } from "@/data/language/language";
 import { AuthModal } from "@/features/authentication/components";
 import { useEffect, useRef, useState } from "react";
+import { setOpenModal } from "@/store/slices/modalSlice";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const lang = useSelector((state: RootState) => state.settings.language);
   const langText = langObj[lang as string].auth;
-  const [openModal, setOpenModal] = useState(false);
 
   useDocumentTitle(langText.htmlTitle);
 
@@ -39,7 +42,7 @@ const AuthPage = () => {
 
   return (
     <div className="auth-page">
-      <AuthModal openModal={openModal} setOpenModal={setOpenModal} />
+      <AuthModal />
 
       <div className="auth-page-container">
         <section className="auth-page-item">
@@ -57,7 +60,10 @@ const AuthPage = () => {
             {/* 이메일 회원가입 */}
             <div
               className="auth-page-btn-wrapper"
-              onClick={() => setOpenModal(true)}
+              onClick={() => {
+                dispatch(setOpenModal(true));
+                navigate("flow");
+              }}
             >
               <AuthButton
                 imgUrl={""}

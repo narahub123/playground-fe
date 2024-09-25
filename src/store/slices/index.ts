@@ -1,2 +1,4 @@
-import { default as settingsReducer } from "./settingsSlice";
-export { settingsReducer };
+import settingsReducer from "./settingsSlice";
+import modalReducer from "./modalSlice";
+
+export { settingsReducer, modalReducer };

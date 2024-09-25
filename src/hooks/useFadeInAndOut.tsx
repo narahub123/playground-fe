@@ -122,6 +122,9 @@ const useFadeInAndOut = (
 
       // 애니메이션 클래스 제거 타이머: 애니매이션 진행 중일 때 ui 상태 변경 방지
       timerRef.current = setTimeout(() => {
+        // 변경 종료
+        setAnimate(false);
+
         // 임시 클래스 삭제하기
         if (!containerRef.current) return;
         containerRef.current?.classList.remove(
@@ -135,11 +138,10 @@ const useFadeInAndOut = (
 
     handleFadeAnimation();
 
+    // 변경 종료
+    if (!containerRef.current) setAnimate(false);
     // 적용시킬 효과와 실제 보이는 것과 일치시킴
     setVisible(isFadeIn);
-
-    // 변경 종료
-    setAnimate(false);
 
     // cleanup 함수
     return () => {
