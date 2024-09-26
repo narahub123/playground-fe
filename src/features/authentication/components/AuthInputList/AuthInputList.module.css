@@ -50,5 +50,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-.text {
+.item.selected {
+  background-color: var(--point-color);
+  color: #fff;
 }

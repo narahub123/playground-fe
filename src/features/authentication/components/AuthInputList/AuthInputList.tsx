@@ -4,6 +4,7 @@ import { AuthInputListType } from "@/types";
 
 interface AuthInputListProps {
   list: AuthInputListType[];
+  index: number | undefined;
   isOpen: boolean;
   setSelect: React.Dispatch<
     React.SetStateAction<AuthInputListType | undefined>
@@ -13,21 +14,26 @@ interface AuthInputListProps {
 
 const AuthInputList = ({
   list,
+  index,
   isOpen,
   setSelect,
   setIsOpen,
 }: AuthInputListProps) => {
   const openCond = isOpen ? styles.open : undefined;
+
   const handleClick = (item: AuthInputListType) => {
     setSelect(item);
     setIsOpen(false);
   };
+
   return (
     <ul className={`${styles.container} ${openCond}`}>
-      {list.map((item) => (
+      {list.map((item, idx) => (
         <li
           key={item.value}
-          className={`${styles.item} ${openCond}`}
+          className={`${styles.item} ${openCond} ${
+            index === idx ? styles.selected : undefined
+          }`}
           onClick={() => handleClick(item)}
         >
           <p className={styles.text}>{item.name}</p>

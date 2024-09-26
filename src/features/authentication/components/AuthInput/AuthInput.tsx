@@ -20,9 +20,13 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
   const [select, setSelect] = useState<AuthInputListType | undefined>(
     undefined
   );
+  const [index, setIndex] = useState<number | undefined>(undefined);
 
   // focus 조건
   const focusCond = focused || text !== "" || select ? styles.focused : "";
+
+  // open 조건
+  const openCond = isOpen ? styles.open : undefined;
 
   // tab / shift + tab 이동을 위한 훅
   useEffect(() => {
@@ -41,14 +45,42 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     };
   }, [focused]);
 
-  //
+  // input 박스 값 입력
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     setText(value);
   };
 
-  console.log("드롭박스 열림?", title, isOpen);
+  // 방향키로 값 입력
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!list) return;
+
+    let newIndex = index;
+    if (e.key === "ArrowDown") {
+      if (index === undefined || index === list.length - 1) {
+        newIndex = 0;
+      } else {
+        newIndex = index + 1;
+      }
+    }
+    if (e.key === "ArrowUp") {
+      if (index === undefined || index === 0) {
+        newIndex = list.length - 1;
+      } else {
+        newIndex = index - 1;
+      }
+    }
+    if (e.key === "Enter") {
+      setIsOpen(!isOpen);
+    }
+    if (e.key === "Escape") {
+      setIsOpen(false);
+    }
+
+    setIndex(newIndex);
+    setSelect(list[newIndex as number]);
+  };
 
   return (
     // AuthInput의 틀: 높이는 고정되어 있고 width는 가변적임
@@ -73,6 +105,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
             }
           : undefined
       }
+      onKeyDown={list ? (e) => handleKeyDown(e) : undefined}
       tabIndex={0}
       ref={wrapperRef}
     >
@@ -117,7 +150,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
         </div>
       </span>
       {list && (
-        <span className={styles.icon}>
+        <span className={`${styles.icon} ${openCond}`}>
           <LuChevronDown className="icon" />
         </span>
       )}
@@ -125,6 +158,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
       {list && (
         <AuthInputList
           list={list}
+          index={index}
           isOpen={isOpen}
           setSelect={setSelect}
           setIsOpen={setIsOpen}
