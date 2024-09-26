@@ -54,12 +54,16 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     // AuthInput의 틀: 높이는 고정되어 있고 width는 가변적임
     <div
       className={`${styles.wrapper} ${focusCond}`}
-      onClick={() => {
-        if (list) setIsOpen(!isOpen);
+      onMouseDown={() => {
+        if (list) {
+          setIsOpen((prev) => !prev);
+        }
       }}
       onFocus={() => {
         setFocused(true);
-        if (list) setIsOpen(true);
+        if (list && !isOpen) {
+          setIsOpen(true);
+        }
       }}
       onBlur={
         list
