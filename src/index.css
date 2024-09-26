@@ -2,7 +2,10 @@
 
 :root {
   --test: 1px solid red;
-  --border-normal: 1px solid #ccc;
+  --point-color: #6495ed;
+  --border-default: 1px solid #ccc;
+  --border-focused: 2px solid var(--point-color);
+  --transition-default: all 0.3s ease-in-out;
 }
 
 :root[color-theme="light"] {
