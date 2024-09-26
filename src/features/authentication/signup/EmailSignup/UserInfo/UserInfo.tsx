@@ -1,9 +1,12 @@
 import styles from "./UserInfo.module.css";
+import { AuthInput } from "@/features/authentication/components";
 
 const UserInfo = () => {
   return (
     <div className={styles.wrapper}>
-      <section className={styles.field}>이름</section>
+      <section className={styles.field}>
+        <AuthInput />
+      </section>
       <section className={styles.field}>성별</section>
       <section className={styles.field}>이메일</section>
       <section className={styles.container}>

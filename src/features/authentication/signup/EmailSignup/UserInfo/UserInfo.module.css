@@ -1,5 +1,4 @@
 .wrapper {
-  border: var(--test);
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -7,13 +6,11 @@
 }
 
 .field {
-  border: var(--test);
   width: 100%;
   height: 60px;
 }
 
 .container {
-  border: var(--test);
   flex: 1;
   display: flex;
   flex-direction: column;

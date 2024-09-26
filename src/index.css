@@ -1,7 +1,8 @@
 @import url("./reset.css");
 
 :root {
-  --test: 1px solid transparent;
+  --test: 1px solid red;
+  --border-normal: 1px solid #ccc;
 }
 
 :root[color-theme="light"] {
