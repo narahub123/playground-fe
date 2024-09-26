@@ -6,4 +6,8 @@ interface LangObjType {
   };
 }
 
-export type { LangObjType };
+interface AuthInputListType {
+  name: string;
+  value: string;
+}
+export type { LangObjType, AuthInputListType };

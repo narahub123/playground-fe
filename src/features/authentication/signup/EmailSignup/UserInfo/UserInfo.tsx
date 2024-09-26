@@ -2,6 +2,7 @@ import { CONSTANT } from "@/constants";
 import styles from "./UserInfo.module.css";
 import { AuthInput } from "@/features/authentication/components";
 import { LuEye } from "react-icons/lu";
+import { signupLists } from "@/data";
 
 const UserInfo = () => {
   return (
@@ -10,7 +11,7 @@ const UserInfo = () => {
         <AuthInput title="이름" limit={CONSTANT.MAX_USERNAME} />
       </section>
       <section className={styles.field}>
-        <AuthInput title="성별" />
+        <AuthInput title="성별" list={signupLists.genderList} />
       </section>
       <section className={styles.field}>
         <AuthInput title="이메일" extra={<LuEye className="icon" />} />

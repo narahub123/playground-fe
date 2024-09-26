@@ -1,0 +1,54 @@
+.container {
+  position: absolute;
+  border: var(--border-default);
+  border-radius: 10px;
+  bottom: 31px;
+  right: 0;
+  width: 50%;
+  background-color: var(--background);
+  color: var(--color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* 변동  */
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+
+  transition: var(--transition-default);
+}
+.container.open {
+  opacity: 1;
+  visibility: visible;
+  max-height: 300px;
+
+  transition: var(--transition-default);
+}
+.item {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  width: 100%;
+
+  /* 변동  */
+  padding: 0px;
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.2s ease-in-out;
+}
+.item:hover {
+  background-color: var(--point-color);
+  color: #fff;
+}
+
+.item.open {
+  padding: 10px;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.4s ease-in-out;
+}
+
+.text {
+}

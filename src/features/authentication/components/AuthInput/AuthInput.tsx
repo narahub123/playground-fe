@@ -1,11 +1,13 @@
 import { LuChevronDown } from "react-icons/lu";
 import styles from "./AuthInput.module.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import { AuthInputListType } from "@/types";
+import AuthInputList from "../AuthInputList/AuthInputList";
 
 interface AuthInputProps {
   title: string;
   limit?: number; // 최대 입력 가능 글 자 수
-  list?: []; // 목록
+  list?: AuthInputListType[]; // 목록
   extra?: ReactNode; // 추가 기능 삽입
 }
 
@@ -14,9 +16,13 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
   const [text, setText] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [select, setSelect] = useState<AuthInputListType | undefined>(
+    undefined
+  );
 
   // focus 조건
-  const focusCond = focused || text !== "" ? styles.focused : "";
+  const focusCond = focused || text !== "" || select ? styles.focused : "";
 
   // tab / shift + tab 이동을 위한 훅
   useEffect(() => {
@@ -35,18 +41,34 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     };
   }, [focused]);
 
+  //
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     setText(value);
   };
 
+  console.log("드롭박스 열림?", title, isOpen);
+
   return (
     // AuthInput의 틀: 높이는 고정되어 있고 width는 가변적임
     <div
       className={`${styles.wrapper} ${focusCond}`}
-      onClick={() => setFocused(true)}
-      onFocus={() => setFocused(true)}
+      onClick={() => {
+        if (list) setIsOpen(!isOpen);
+      }}
+      onFocus={() => {
+        setFocused(true);
+        if (list) setIsOpen(true);
+      }}
+      onBlur={
+        list
+          ? () => {
+              setFocused(false);
+              setIsOpen(false);
+            }
+          : undefined
+      }
       tabIndex={0}
       ref={wrapperRef}
     >
@@ -71,14 +93,21 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
         </div>
         {/* input 필드: 목록이 있는 것을 다루면 코드 추가 예정*/}
         <div className={`${styles.box} ${focusCond}`}>
-          <input
-            type="text"
-            className={`${styles.input} ${focusCond}`}
-            ref={inputRef}
-            onBlur={() => setFocused(false)}
-            maxLength={limit} // 글자수 제한
-            onChange={(e) => handleChangeInput(e)}
-          />
+          {list ? (
+            <p>{select?.name}</p>
+          ) : (
+            <input
+              type="text"
+              className={`${styles.input} ${focusCond}`}
+              ref={inputRef}
+              onBlur={() => {
+                setFocused(false);
+              }}
+              maxLength={limit} // 글자수 제한
+              onChange={(e) => handleChangeInput(e)}
+            />
+          )}
+
           {/* 간단한 버튼 등을 삽입 가능 */}
           {extra}
         </div>
@@ -87,6 +116,15 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
         <span className={styles.icon}>
           <LuChevronDown className="icon" />
         </span>
+      )}
+      {/* 드롭박스 */}
+      {list && (
+        <AuthInputList
+          list={list}
+          isOpen={isOpen}
+          setSelect={setSelect}
+          setIsOpen={setIsOpen}
+        />
       )}
     </div>
   );
