@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ModalLayout } from "@/layouts";
 import { AuthButton } from "@/components";
 import { useFocusTrap } from "@/hooks";
+import UserInfo from "./EmailSignup/UserInfo/UserInfo";
 
 const Signup = () => {
   const [step, setStep] = useState(0);
@@ -19,7 +20,7 @@ const Signup = () => {
 
   return (
     <ModalLayout
-      title="제목"
+      title="계정을 생성하세요"
       button={
         <AuthButton
           imgUrl={""}
@@ -29,7 +30,7 @@ const Signup = () => {
         />
       }
     >
-      <p>본문</p>
+      <UserInfo />
     </ModalLayout>
   );
 };

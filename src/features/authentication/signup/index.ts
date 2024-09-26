@@ -1,3 +1,3 @@
 import Signup from "./Signup";
-
-export { Signup };
+import UserInfo from "./EmailSignup/UserInfo/UserInfo";
+export { Signup, UserInfo };

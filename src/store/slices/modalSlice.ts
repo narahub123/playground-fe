@@ -5,7 +5,7 @@ interface ModalState {
 }
 
 const initialState: ModalState = {
-  openModal: false,
+  openModal: true,
 };
 
 const modalSlice = createSlice({
