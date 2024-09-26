@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import NotFound from "@/pages/NotFound/NotFound";
-import { AuthModal } from "@/features/authentication/components";
-import Signup from "@/features/authentication/signup/Signup";
 import { DefaultLayout } from "@/layouts";
+import { AuthModal } from "@/features/authentication/components";
+import { Signup } from "@/features/authentication/signup";
 
 export const router = createBrowserRouter([
   {

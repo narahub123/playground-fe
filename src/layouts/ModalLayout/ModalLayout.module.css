@@ -1,0 +1,27 @@
+.container {
+  padding: 50px;
+  border: 1px solid var(--test);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 30px;
+}
+
+.header {
+  border: 1px solid var(--test);
+  font-weight: bold;
+  font-size: 30px;
+}
+.content {
+  border: 1px solid var(--test);
+  flex: 1;
+}
+.footer {
+  border: 1px solid var(--test);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
