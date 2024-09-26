@@ -13,9 +13,12 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
-  const focusCond = focused ? styles.focused : "";
+  const [text, setText] = useState("");
 
-  // tab / shift + tab 이동을 위한 훅ㄴ
+  // focus 조건
+  const focusCond = focused || text !== "" ? styles.focused : "";
+
+  // tab / shift + tab 이동을 위한 훅
   useEffect(() => {
     if (!inputRef.current || !wrapperRef.current) return;
     // 포커스시 input으로 포커스 이동
@@ -32,6 +35,12 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     };
   }, [focused]);
 
+  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    setText(value);
+  };
+
   return (
     // AuthInput의 틀: 높이는 고정되어 있고 width는 가변적임
     <div
@@ -43,7 +52,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     >
       {/* 목록이 있는 경우 메인없는 경우에는 wrapper가 하나 더 있는 것임 */}
       {/* 목록이 없는 경우를 상정해서 flex: 1 설정 */}
-      <span className={styles.main}>
+      <span className={`${styles.main} ${focusCond}`}>
         {/* 타이틀과 그밖에 정보를 제공 */}
         <div className={styles.info}>
           {/* 좌측 */}
@@ -54,7 +63,8 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
           <span className={styles.right}>
             {limit && focused && (
               <p className={styles.count}>
-                <span className={styles.length}>0</span> / {limit}
+                {/* 현재 글자수 확인 */}
+                <span className={styles.length}>{text.length}</span> / {limit}
               </p>
             )}
           </span>
@@ -66,6 +76,8 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
             className={`${styles.input} ${focusCond}`}
             ref={inputRef}
             onBlur={() => setFocused(false)}
+            maxLength={limit} // 글자수 제한
+            onChange={(e) => handleChangeInput(e)}
           />
           {/* 간단한 버튼 등을 삽입 가능 */}
           {extra}
