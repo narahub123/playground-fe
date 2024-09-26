@@ -10,15 +10,26 @@ interface AuthInputProps {
 }
 
 const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
   const focusCond = focused ? styles.focused : "";
 
+  // tab / shift + tab 이동을 위한 훅ㄴ
   useEffect(() => {
-    if (!inputRef.current) return;
+    if (!inputRef.current || !wrapperRef.current) return;
+    // 포커스시 input으로 포커스 이동
+    // wrapper을 포커스 불가 변경
     if (focused) {
       inputRef.current.focus();
+      wrapperRef.current.tabIndex = -1;
     }
+
+    // wrapper에 포커스 가능으로 변경
+    return () => {
+      if (!wrapperRef.current) return;
+      wrapperRef.current.tabIndex = 0;
+    };
   }, [focused]);
 
   return (
@@ -28,6 +39,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
       onClick={() => setFocused(true)}
       onFocus={() => setFocused(true)}
       tabIndex={0}
+      ref={wrapperRef}
     >
       {/* 목록이 있는 경우 메인없는 경우에는 wrapper가 하나 더 있는 것임 */}
       {/* 목록이 없는 경우를 상정해서 flex: 1 설정 */}
