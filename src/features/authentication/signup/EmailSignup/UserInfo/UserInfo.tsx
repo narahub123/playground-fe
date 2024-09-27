@@ -12,13 +12,21 @@ const UserInfo = () => {
   return (
     <div className={styles.wrapper}>
       <section className={styles.field}>
-        <AuthInput title="이름" limit={CONSTANT.MAX_USERNAME} />
+        <AuthInput
+          title="이름"
+          field="username"
+          limit={CONSTANT.MAX_USERNAME}
+        />
       </section>
       <section className={styles.field}>
-        <AuthInput title="성별" list={signupLists.genderList} />
+        <AuthInput title="성별" field="gender" list={signupLists.genderList} />
       </section>
       <section className={styles.field}>
-        <AuthInput title="이메일" extra={<LuEye className="icon" />} />
+        <AuthInput
+          title="이메일"
+          field="email"
+          extra={<LuEye className="icon" />}
+        />
       </section>
       <section className={styles.container}>
         <p className={styles.title}>생년월일</p>
@@ -28,17 +36,26 @@ const UserInfo = () => {
         </p>
         <div className={styles.birth}>
           <span className={styles.field}>
-            <AuthInput title="년" list={signupLists.calendarList.yearList} />
+            <AuthInput
+              title="년"
+              field="year"
+              list={signupLists.calendarList.yearList}
+            />
           </span>
           <span className={styles.field}>
             <AuthInput
               title="월"
+              field="month"
               list={signupLists.calendarList.monthList(lang)}
             />
           </span>
           <span className={styles.field}>
             {/* year, month 추가 필요 */}
-            <AuthInput title="일" list={signupLists.calendarList.dateList()} />
+            <AuthInput
+              title="일"
+              field="date"
+              list={signupLists.calendarList.dateList()}
+            />
           </span>
         </div>
       </section>

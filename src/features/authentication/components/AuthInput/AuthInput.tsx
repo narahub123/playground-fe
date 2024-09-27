@@ -3,15 +3,19 @@ import styles from "./AuthInput.module.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
+import { useDispatch } from "react-redux";
+import { updateField } from "@/store/slices/signupSlice";
 
 interface AuthInputProps {
   title: string;
+  field: string;
   limit?: number; // 최대 입력 가능 글 자 수
   list?: AuthInputListType[]; // 목록
   extra?: ReactNode; // 추가 기능 삽입
 }
 
-const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
+const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
+  const dispatch = useDispatch();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -50,6 +54,7 @@ const AuthInput = ({ title, limit, list, extra }: AuthInputProps) => {
     const value = e.target.value;
 
     setText(value);
+    dispatch(updateField({ field, value }));
   };
 
   // 방향키로 값 입력
