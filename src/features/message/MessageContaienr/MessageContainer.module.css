@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
-  top: 30px;
-  right: 0;
+  top: 35px;
+  right: 5px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -9,8 +9,8 @@
   width: 401px;
 
   /* 나중에 max-height로 바꿔야 함 */
-  height: 500px;
+  max-height: 500px;
   /* 삭제할 것 */
-  background-color: #fff;
-  border: var(--border-default);
+  /* background-color: #fff;
+  border: var(--border-default); */
 }

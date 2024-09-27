@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  border: var(--border-default);
+  border-radius: 10px;
+
+  background-color: var(--background);
+}
+
+.container.success {
+  border: 1px solid var(--point-color);
+}
+.container.error {
+  border: 1px solid var(--color-error);
+}
+.container.warning {
+  border: 1px solid var(--color-warning);
+}
+.container.info {
+  border: 1px solid var(--color-info);
+}
+.container.help {
+  border: 1px solid var(--color-help);
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.icon.success {
+  color: var(--point-color);
+}
+.icon.error {
+  color: var(--color-error);
+}
+.icon.warning {
+  color: var(--color-warning);
+}
+.icon.info {
+  color: var(--color-info);
+}
+.icon.help {
+  color: var(--color-help);
+}
+
+.content {
+  flex: 1;
+}
+.close {
+  cursor: pointer;
+}
