@@ -21,7 +21,7 @@ const UserInfo = () => {
         <p className={styles.detail}>어쩌구 저쩌구</p>
         <div className={styles.birth}>
           <span className={styles.field}>
-            <AuthInput title="년" />
+            <AuthInput title="년" list={signupLists.calendarList.yearList} />
           </span>
           <span className={styles.field}>
             <AuthInput title="월" />

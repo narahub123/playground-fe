@@ -7,7 +7,7 @@ interface LangObjType {
 }
 
 interface AuthInputListType {
-  name: string;
-  value: string;
+  name: string | number;
+  value: string | number;
 }
 export type { LangObjType, AuthInputListType };
