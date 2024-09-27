@@ -55,3 +55,16 @@
   background-color: var(--point-color);
   color: #fff;
 }
+
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--point-color);
+  border-radius: 10px;
+  background-clip: padding-box;
+}
+.container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
