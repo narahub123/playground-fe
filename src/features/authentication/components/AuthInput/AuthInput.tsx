@@ -1,9 +1,9 @@
 import { LuChevronDown } from "react-icons/lu";
 import styles from "./AuthInput.module.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { AuthInputListType } from "@/types";
+import { AuthInputListType, MessageType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BirthType,
   SignupState,
@@ -11,6 +11,8 @@ import {
 } from "@/store/slices/signupSlice";
 import { debounce } from "@/utils";
 import { checkValidation } from "../../utils";
+import { addMessage } from "@/store/slices/messageSlice";
+import { RootState } from "@/store/store";
 
 interface AuthInputProps {
   title: string;
@@ -66,7 +68,10 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     setText(value);
 
     // 유효성 검사
-    if (checkValidation(field, value, setIsError)) {
+    const { status, text } = checkValidation(field, value, setIsError);
+
+    dispatch(addMessage({ status, text }));
+    if (status === "success") {
       dispatch(updateField({ field: field as keyof SignupState, value }));
     }
   };

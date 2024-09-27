@@ -10,4 +10,10 @@ interface AuthInputListType {
   name: string | number;
   value: string | number;
 }
-export type { LangObjType, AuthInputListType };
+
+interface MessageType {
+  status: "success" | "error" | "warning" | "info" | "help" | undefined;
+  text: string | undefined;
+}
+
+export type { LangObjType, AuthInputListType, MessageType };
