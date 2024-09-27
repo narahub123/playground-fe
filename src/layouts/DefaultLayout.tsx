@@ -6,6 +6,7 @@ import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
 import { FocusTrapProvider } from "@/contexts";
 import { AuthPage } from "@/pages";
 import { updateField } from "@/store/slices/signupSlice";
+import { MessageContainer } from "@/features/message";
 
 const DefaultLayout = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const DefaultLayout = () => {
     <FocusTrapProvider>
       {/* 전역 컴포넌트 */}
       <SettingButtonsLayout />
+      <MessageContainer />
       {/* 로그인 여부 확인해서 페이지 결정 */}
       {isLogin ? "" : <AuthPage />}
     </FocusTrapProvider>

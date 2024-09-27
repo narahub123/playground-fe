@@ -1,0 +1,16 @@
+.wrapper {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 401px;
+
+  /* 나중에 max-height로 바꿔야 함 */
+  height: 500px;
+  /* 삭제할 것 */
+  background-color: #fff;
+  border: var(--border-default);
+}
