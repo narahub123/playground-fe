@@ -4,13 +4,17 @@
   --test: 1px solid red;
   --point-color: #6495ed;
   --color-success: cornflowerblue;
-  --color-error: orange;
+  --color-error: red;
   --color-warning: red;
   --color-info: green;
   --color-help: purple;
   --border-default: 1px solid #ccc;
   --border-focused: 2px solid var(--point-color);
-  --border-error: 2px solid red;
+  --border-success: 2px solid var(--color-success);
+  --border-error: 2px solid var(--color-error);
+  --border-warning: 2px solid var(--color-warning);
+  --border-info: 2px solid var(--color-info);
+  --border-help: 2px solid var(--color-help);
   --transition-default: all 0.3s ease-in-out;
   --transition-fast: all 0.1s ease-in-out;
 }

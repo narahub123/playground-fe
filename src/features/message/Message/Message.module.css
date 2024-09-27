@@ -12,19 +12,19 @@
 }
 
 .container.success {
-  border: 1px solid var(--point-color);
+  border: var(--border-success);
 }
 .container.error {
-  border: 1px solid var(--color-error);
+  border: var(--border-error);
 }
 .container.warning {
-  border: 1px solid var(--color-warning);
+  border: var(--border-warning);
 }
 .container.info {
-  border: 1px solid var(--color-info);
+  border: var(--border-info);
 }
 .container.help {
-  border: 1px solid var(--color-help);
+  border: var(--border-help);
 }
 
 .icon {

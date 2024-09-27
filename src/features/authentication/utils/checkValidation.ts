@@ -8,10 +8,11 @@ export const checkValidation = (
 ) => {
   let message: MessageType = { status: undefined, text: undefined };
   let isError = false;
-
+  if (value === "") return;
   if (field === "username") {
   } else if (field === "email") {
     let newMessage: MessageType;
+
     if (!AuthRegExList.email.test(value)) {
       console.log("유효하지 않은 이메일 형식입니다.");
       newMessage = {

@@ -50,8 +50,16 @@ const messageSlice = createSlice({
       // 새 배열로 덮어씌움
       state.messages = [newMessage, ...state.messages];
     },
+    deleteMessage: (state, action) => {
+      const messages = state.messages;
+      const index: number = action.payload;
+
+      messages.splice(index, 1);
+
+      state.messages = messages;
+    },
   },
 });
 
 export default messageSlice.reducer;
-export const { reset, addMessage } = messageSlice.actions;
+export const { reset, addMessage, deleteMessage } = messageSlice.actions;

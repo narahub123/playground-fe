@@ -7,12 +7,18 @@ import {
   LuX,
 } from "react-icons/lu";
 import styles from "./Message.module.css";
+import { MessageType } from "@/types";
+import { useDispatch } from "react-redux";
+import { deleteMessage } from "@/store/slices/messageSlice";
 
 interface MessageProps {
-  status: string;
+  message: MessageType;
+  index: number;
 }
 
-const Message = ({ status }: MessageProps) => {
+const Message = ({ message, index }: MessageProps) => {
+  const dispatch = useDispatch();
+  const { status, text } = message;
   const statusCond =
     status === "success"
       ? styles.success
@@ -25,8 +31,21 @@ const Message = ({ status }: MessageProps) => {
       : status === "help"
       ? styles.help
       : undefined;
+
+  const handleDelete = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    dispatch(deleteMessage(index));
+  };
   return (
-    <div className={`${styles.container} ${statusCond}`}>
+    <div
+      className={`${styles.container} ${statusCond}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      }}
+    >
       <span className={`${styles.icon} ${statusCond}`}>
         {status === "success" ? (
           <LuBadgeCheck className={`icon`} />
@@ -40,9 +59,12 @@ const Message = ({ status }: MessageProps) => {
           <LuBadgeHelp className={`icon`} />
         ) : undefined}
       </span>
-      <span className={styles.content}>본문</span>
+      <span className={styles.content}>{text}</span>
 
-      <LuX className={`icon ${styles.close}`} />
+      <LuX
+        className={`icon ${styles.close}`}
+        onClick={(e) => handleDelete(e)}
+      />
     </div>
   );
 };
