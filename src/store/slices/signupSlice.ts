@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface SignupState {
+export interface SignupState {
   ip: string;
-  address: string;
+  address: {
+    lat: number | string;
+    lng: number | string;
+  };
   username: string;
   gender: string;
   email: string;
@@ -11,7 +14,10 @@ interface SignupState {
 
 const initialState: SignupState = {
   ip: "",
-  address: "",
+  address: {
+    lat: "",
+    lng: "",
+  },
   username: "",
   gender: "",
   email: "",
@@ -28,11 +34,22 @@ const signupSlice = createSlice({
     // 필드 값 추가하기
     updateField: (
       state,
-      action: PayloadAction<{ field: string; value: string }>
+      action: PayloadAction<{
+        field: keyof SignupState;
+        value: string | { lat: number | string; lng: number | string };
+      }>
     ) => {
       const { field, value } = action.payload;
 
-      state[field as keyof SignupState] = value;
+      if (field === "address") {
+        if (typeof value === "object" && value !== null) {
+          const { lat, lng } = value;
+          state.address.lat = lat;
+          state.address.lng = lng;
+        }
+      } else {
+        state[field] = value as string;
+      }
     },
   },
 });

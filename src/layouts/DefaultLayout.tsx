@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SettingButtonsLayout from "./SettingButtonLayout/SettingButtonsLayout";
 import { FocusTrapProvider } from "@/contexts";
 import { AuthPage } from "@/pages";
+import { updateField } from "@/store/slices/signupSlice";
 
 const DefaultLayout = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,69 @@ const DefaultLayout = () => {
     if (language === lang) return;
 
     dispatch(changeLanguage(lang));
+  }, []);
+
+  // ip 주소 알아내기
+  useEffect(() => {
+    const url = "https://api.ipify.org?format=json";
+    const getIp = async () => {
+      const response = await fetch(url, {
+        method: "GET",
+      });
+
+      if (!response.ok) return;
+
+      const data = await response.json();
+
+      dispatch(updateField({ field: "ip", value: data.ip }));
+    };
+
+    getIp();
+  }, []);
+
+  // 주소 알아내기: 정확도가 떨어지는데 어떻게 정확히 알아내는지 모르겠음
+  useEffect(() => {
+    const getLocation = (position: { coords: GeolocationCoordinates }) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      dispatch(updateField({ field: "address", value: { lat, lng } }));
+    };
+
+    // 에러 모달이 완성되면 적용할 것
+    const handleError = (error: any) => {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          console.log(
+            "이 문장은 사용자가 Geolocation API의 사용 요청을 거부했을 때 나타납니다!"
+          );
+          break;
+
+        case error.POSITION_UNAVAILABLE:
+          console.log(
+            "이 문장은 가져온 위치 정보를 사용할 수 없을 때 나타납니다!"
+          );
+          break;
+
+        case error.TIMEOUT:
+          console.log(
+            "이 문장은 위치 정보를 가져오기 위한 요청이 허용 시간을 초과했을 때 나타납니다!"
+          );
+          break;
+
+        case error.UNKNOWN_ERROR:
+          console.log("이 문장은 알 수 없는 오류가 발생했을 때 나타납니다!");
+          break;
+      }
+    };
+
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0,
+    };
+
+    navigator.geolocation.getCurrentPosition(getLocation, handleError, options);
   }, []);
 
   const isLogin = false;

@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
 import { useDispatch } from "react-redux";
-import { updateField } from "@/store/slices/signupSlice";
+import { SignupState, updateField } from "@/store/slices/signupSlice";
 
 interface AuthInputProps {
   title: string;
@@ -54,7 +54,7 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     const value = e.target.value;
 
     setText(value);
-    dispatch(updateField({ field, value }));
+    dispatch(updateField({ field: field as keyof SignupState, value }));
   };
 
   // 방향키로 값 입력
