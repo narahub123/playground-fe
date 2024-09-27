@@ -1,15 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+export interface AddressType {
+  lat: number | string;
+  lng: number | string;
+}
+
+export interface BirthType {
+  year?: number;
+  month?: number;
+  date?: number;
+}
+
 export interface SignupState {
   ip: string;
-  address: {
-    lat: number | string;
-    lng: number | string;
-  };
+  address: AddressType;
   username: string;
   gender: string;
   email: string;
-  birth: string;
+  birth: BirthType;
 }
 
 const initialState: SignupState = {
@@ -21,7 +29,11 @@ const initialState: SignupState = {
   username: "",
   gender: "",
   email: "",
-  birth: "",
+  birth: {
+    year: undefined,
+    month: undefined,
+    date: undefined,
+  },
 };
 
 const signupSlice = createSlice({
@@ -36,16 +48,23 @@ const signupSlice = createSlice({
       state,
       action: PayloadAction<{
         field: keyof SignupState;
-        value: string | { lat: number | string; lng: number | string };
+        value: string | AddressType | BirthType;
       }>
     ) => {
       const { field, value } = action.payload;
 
       if (field === "address") {
         if (typeof value === "object" && value !== null) {
-          const { lat, lng } = value;
+          const { lat, lng } = value as AddressType;
           state.address.lat = lat;
           state.address.lng = lng;
+        }
+      } else if (field === "birth") {
+        if (typeof value === "object" && value !== null) {
+          state.birth = {
+            ...state.birth,
+            ...(action.payload.value as BirthType),
+          };
         }
       } else {
         state[field] = value as string;

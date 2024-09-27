@@ -4,7 +4,12 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
 import { useDispatch } from "react-redux";
-import { SignupState, updateField } from "@/store/slices/signupSlice";
+import {
+  BirthType,
+  SignupState,
+  updateField,
+} from "@/store/slices/signupSlice";
+import { debounce } from "@/utils";
 
 interface AuthInputProps {
   title: string;
@@ -57,6 +62,11 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     dispatch(updateField({ field: field as keyof SignupState, value }));
   };
 
+  const debouncedHandleChangeInput = debounce<typeof handleChangeInput>(
+    handleChangeInput,
+    500
+  );
+
   // 방향키로 값 입력
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!list) return;
@@ -68,19 +78,34 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
       } else {
         newIndex = index + 1;
       }
-    }
-    if (e.key === "ArrowUp") {
+    } else if (e.key === "ArrowUp") {
       if (index === undefined || index === 0) {
         newIndex = list.length - 1;
       } else {
         newIndex = index - 1;
       }
-    }
-    if (e.key === "Enter") {
+    } else if (e.key === "Enter") {
       setIsOpen(!isOpen);
-    }
-    if (e.key === "Escape") {
+      const newField =
+        field !== "year" && field !== "month" && field !== "date"
+          ? field
+          : "birth";
+      const value =
+        field !== "year" && field !== "month" && field !== "date"
+          ? list[newIndex as number].value.toString()
+          : {
+              [field as keyof BirthType]: list[newIndex as number]
+                .value as number,
+            };
+      dispatch(
+        updateField({ field: newField as keyof SignupState, value: value })
+      );
+      return;
+    } else if (e.key === "Escape") {
       setIsOpen(false);
+      return;
+    } else {
+      return;
     }
 
     setIndex(newIndex);
@@ -107,10 +132,35 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
           ? () => {
               setFocused(false);
               setIsOpen(false);
+              if (select) {
+                const newField =
+                  field !== "year" && field !== "month" && field !== "date"
+                    ? field
+                    : "birth";
+                const value =
+                  field !== "year" && field !== "month" && field !== "date"
+                    ? select.value.toString()
+                    : {
+                        [field as keyof BirthType]: select.value as number,
+                      };
+
+                dispatch(
+                  updateField({
+                    field: newField as keyof SignupState,
+                    value,
+                  })
+                );
+              }
             }
           : undefined
       }
-      onKeyDown={list ? (e) => handleKeyDown(e) : undefined}
+      onKeyDown={
+        list
+          ? (e) => {
+              handleKeyDown(e);
+            }
+          : undefined
+      }
       tabIndex={0}
       ref={wrapperRef}
     >
@@ -146,7 +196,7 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
                 setFocused(false);
               }}
               maxLength={limit} // 글자수 제한
-              onChange={(e) => handleChangeInput(e)}
+              onChange={debouncedHandleChangeInput}
             />
           )}
 
