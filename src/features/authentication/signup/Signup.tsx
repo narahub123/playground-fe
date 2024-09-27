@@ -28,16 +28,17 @@ const Signup = () => {
   return (
     <ModalLayout
       title="계정을 생성하세요"
-      button={
+      button={(isValid) => (
         <AuthButton
           imgUrl={""}
           label={"다음"}
           color="cornflowerblue"
           ref={buttonRef}
+          isValid={isValid}
         />
-      }
+      )}
     >
-      <UserInfo />
+      {(setIsValid) => <UserInfo setIsValid={setIsValid} />}
     </ModalLayout>
   );
 };

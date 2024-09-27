@@ -5,9 +5,33 @@ import { LuEye } from "react-icons/lu";
 import { signupLists } from "@/data";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { useEffect, useState } from "react";
 
-const UserInfo = () => {
+interface UserInfoProps {
+  setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const UserInfo = ({ setIsValid }: UserInfoProps) => {
   const lang = useSelector((state: RootState) => state.settings.language);
+  const { username, gender, email, birth } = useSelector(
+    (state: RootState) => state.signup
+  );
+
+  // 존재 여부에 대한 유효성 검사
+  useEffect(() => {
+    if (
+      username &&
+      gender &&
+      email &&
+      birth.year &&
+      birth.month &&
+      birth.date
+    ) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, [username, gender, email, birth]);
 
   return (
     <div className={styles.wrapper}>

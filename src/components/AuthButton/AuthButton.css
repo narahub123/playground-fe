@@ -8,8 +8,26 @@
   padding: 10px;
   cursor: pointer;
   width: 100%;
+  transition: var(--transition-default);
 }
 
+.auth-button.invalid {
+  transition: var(--transition-default);
+  background-color: #ccc;
+  cursor: default;
+}
+.auth-button.invalid:hover {
+  background-color: #ccc;
+}
+.auth-button.valid {
+  transition: var(--transition-default);
+  background: var(--point-color);
+  color: #fff;
+}
+.auth-button.valid:hover {
+  background: rgba(100, 148, 237, 0.9);
+  color: #fff;
+}
 /* hover 시 기본 색상 */
 .auth-button:hover {
   background-color: rgba(237, 237, 237, 0.5);
@@ -18,6 +36,17 @@
 .auth-button-text {
   font-weight: bold;
 }
+
+.auth-button-text.valid {
+  color: #fff;
+  transition: var(--transition-default);
+}
+
+.auth-button-text.invalid {
+  color: #000;
+  transition: var(--transition-default);
+}
+
 .auth-button-image {
   width: 20px;
   height: 20px;
