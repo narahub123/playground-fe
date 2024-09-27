@@ -1,4 +1,4 @@
 import { languageList } from "./language";
-import { signupLists } from "./signup";
+import { signupLists, AuthRegExList } from "./signup";
 
-export { languageList, signupLists };
+export { languageList, signupLists, AuthRegExList };

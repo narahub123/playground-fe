@@ -48,7 +48,6 @@ const AuthButton = forwardRef<HTMLElement, AuthButtonProps>(
         onMouseEnter={() => handleMouseEnter()}
         onMouseLeave={() => handleMouseLeave()}
         ref={ref as React.RefObject<HTMLButtonElement>}
-        disabled={disableCond}
       >
         {imgUrl && (
           <img

@@ -5,7 +5,9 @@
   --point-color: #6495ed;
   --border-default: 1px solid #ccc;
   --border-focused: 2px solid var(--point-color);
+  --border-error: 2px solid red;
   --transition-default: all 0.3s ease-in-out;
+  --transition-fast: all 0.1s ease-in-out;
 }
 
 :root[color-theme="light"] {

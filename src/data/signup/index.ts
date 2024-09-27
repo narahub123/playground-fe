@@ -77,4 +77,9 @@ const signupLists = {
   calendarList,
 };
 
-export { signupLists };
+// 인증 유효성 정규 표현식
+const AuthRegExList = {
+  email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
+};
+
+export { signupLists, AuthRegExList };

@@ -12,8 +12,6 @@ interface ModalLayoutProps {
 const ModalLayout = ({ title, children, button }: ModalLayoutProps) => {
   const [isValid, setIsValid] = useState(false);
 
-  console.log(isValid);
-
   return (
     <div className={styles.container}>
       <section className={styles.header}>{title}</section>

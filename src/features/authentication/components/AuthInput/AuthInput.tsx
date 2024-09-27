@@ -10,6 +10,7 @@ import {
   updateField,
 } from "@/store/slices/signupSlice";
 import { debounce } from "@/utils";
+import { checkValidation } from "../../utils";
 
 interface AuthInputProps {
   title: string;
@@ -30,12 +31,16 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     undefined
   );
   const [index, setIndex] = useState<number | undefined>(undefined);
+  const [isError, setIsError] = useState(false);
 
   // focus 조건
   const focusCond = focused || text !== "" || select ? styles.focused : "";
 
   // open 조건
   const openCond = isOpen ? styles.open : undefined;
+
+  // error 조건
+  const errorCond = isError && text !== "" ? styles.error : undefined;
 
   // tab / shift + tab 이동을 위한 훅
   useEffect(() => {
@@ -59,7 +64,11 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     const value = e.target.value;
 
     setText(value);
-    dispatch(updateField({ field: field as keyof SignupState, value }));
+
+    // 유효성 검사
+    if (checkValidation(field, value, setIsError)) {
+      dispatch(updateField({ field: field as keyof SignupState, value }));
+    }
   };
 
   const debouncedHandleChangeInput = debounce<typeof handleChangeInput>(
@@ -115,7 +124,7 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
   return (
     // AuthInput의 틀: 높이는 고정되어 있고 width는 가변적임
     <div
-      className={`${styles.wrapper} ${focusCond}`}
+      className={`${styles.wrapper} ${focusCond} ${errorCond}`}
       onMouseDown={() => {
         if (list) {
           setIsOpen((prev) => !prev);

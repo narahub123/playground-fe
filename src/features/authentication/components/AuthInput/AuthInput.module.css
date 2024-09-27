@@ -8,10 +8,17 @@
   padding: 10px;
   width: 100%;
   height: 58.6px;
+  transition: var(--transition-fast);
 }
 
 .wrapper.focused {
   border: var(--border-focused);
+  transition: var(--transition-fast);
+}
+
+.wrapper.error {
+  border: var(--border-error);
+  transition: var(--transition-fast);
 }
 
 .main {

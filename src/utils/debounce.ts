@@ -5,8 +5,6 @@ export const debounce = <T extends (...args: any[]) => any>(
   let timeout: ReturnType<typeof setTimeout>;
 
   return (...args: Parameters<T>): void => {
-    console.log(timeout);
-
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
       fn(...args);
