@@ -5,6 +5,7 @@
   bottom: 31px;
   right: 0;
   width: 50%;
+  min-width: 100px;
   background-color: var(--background);
   color: var(--color);
   display: flex;
