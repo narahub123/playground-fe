@@ -3,7 +3,7 @@
 const CONSTANT = {
   MODAL_DURATION: 300,
   MAX_USERNAME: 50,
-  MAX_MESSAGES: 5,
+  MAX_MESSAGES: 6,
 };
 
 export { CONSTANT };

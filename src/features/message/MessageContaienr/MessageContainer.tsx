@@ -9,7 +9,7 @@ const MessageContainer = () => {
   return (
     <div className={styles.wrapper}>
       {messages.map((message, index) => (
-        <Message message={message} index={index}/>
+        <Message message={message} index={index} key={index} />
       ))}
     </div>
   );

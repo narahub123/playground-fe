@@ -27,6 +27,47 @@
   border: var(--border-help);
 }
 
+.container.fade-in {
+  animation: slideIn 0.5s forwards;
+}
+.container.fade-down {
+  animation: slideDown 0.5s forwards;
+}
+.container.fade-out {
+  animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+
 .icon {
   font-size: 20px;
 }
