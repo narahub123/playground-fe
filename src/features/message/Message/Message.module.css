@@ -93,4 +93,5 @@
 }
 .close {
   cursor: pointer;
+  border: none;
 }

@@ -21,6 +21,7 @@ interface MessageProps {
 const Message = ({ message, index }: MessageProps) => {
   const dispatch = useDispatch();
   const msgRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLButtonElement>(null);
   const { status, text } = message;
 
   // fade in/fade down / fade down 효과
@@ -68,6 +69,12 @@ const Message = ({ message, index }: MessageProps) => {
     return () => clearTimeout(newTimer);
   }, []);
 
+  useEffect(() => {
+    if (!iconRef.current) return;
+
+    iconRef.current.focus();
+  }, []);
+
   const statusCond =
     status === "success"
       ? styles.success
@@ -81,7 +88,7 @@ const Message = ({ message, index }: MessageProps) => {
       ? styles.help
       : "";
 
-  const handleDelete = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -99,26 +106,37 @@ const Message = ({ message, index }: MessageProps) => {
         e.preventDefault();
       }}
       ref={msgRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={`message-title-${index}`}
+      aria-describedby={`message-content-${index}`}
     >
-      <span className={`${styles.icon} ${statusCond}`}>
+      <span
+        className={`${styles.icon} ${statusCond}`}
+        id={`message-title-${index}`}
+      >
         {status === "success" ? (
-          <LuBadgeCheck className={`icon`} />
+          <LuBadgeCheck className={`icon`} aria-label="성공" />
         ) : status === "error" ? (
-          <LuBadgeAlert className={`icon`} />
+          <LuBadgeAlert className={`icon`} aria-label="에러" />
         ) : status === "warning" ? (
-          <LuBadgeX className={`icon`} />
+          <LuBadgeX className={`icon`} aria-label="경고" />
         ) : status === "info" ? (
-          <LuBadgeInfo className={`icon`} />
+          <LuBadgeInfo className={`icon`} aria-label="정보" />
         ) : status === "help" ? (
-          <LuBadgeHelp className={`icon`} />
+          <LuBadgeHelp className={`icon`} aria-label="도움" />
         ) : undefined}
       </span>
-      <span className={styles.content}>{text}</span>
-
-      <LuX
+      <span className={styles.content} id={`message-content-${index}`}>
+        {text}
+      </span>
+      <button
         className={`icon ${styles.close}`}
+        ref={iconRef}
         onClick={(e) => handleDelete(e)}
-      />
+      >
+        <LuX aria-label="메시지 닫기" />
+      </button>
     </div>
   );
 };
