@@ -68,7 +68,14 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     setText(value);
 
     // 유효성 검사
-    const { status, text } = checkValidation(field, value, setIsError);
+    const message = checkValidation(field, value, setIsError);
+    // 메시지가 없는 경우
+    if (!message) {
+      dispatch(updateField({ field: field as keyof SignupState, value }));
+      return;
+    }
+
+    const { status, text } = message;
 
     dispatch(addMessage({ status, text }));
     if (status === "success") {
