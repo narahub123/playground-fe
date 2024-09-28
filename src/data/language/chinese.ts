@@ -24,4 +24,8 @@ export const chinese = {
     11: "11月",
     12: "12月",
   },
+  message: {
+    email_success: "邮箱格式有效。",
+    email_error: "邮箱格式无效。",
+  },
 };

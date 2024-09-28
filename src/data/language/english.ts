@@ -24,4 +24,8 @@ export const english = {
     11: "Nov",
     12: "Dec",
   },
+  message: {
+    email_success: "The email format is valid.",
+    email_error: "The email format is invalid.",
+  },
 };

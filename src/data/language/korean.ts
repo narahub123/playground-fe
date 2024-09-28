@@ -24,4 +24,8 @@ export const korean = {
     11: "11월",
     12: "12월",
   },
+  message: {
+    email_success: "유효한 이메일 형식입니다.",
+    email_error: "유효하지 않은 이메일 형식입니다.",
+  },
 };

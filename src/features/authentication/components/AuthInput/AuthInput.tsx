@@ -3,7 +3,7 @@ import styles from "./AuthInput.module.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BirthType,
   SignupState,
@@ -12,6 +12,7 @@ import {
 import { debounce } from "@/utils";
 import { checkValidation } from "../../utils";
 import { addMessage } from "@/store/slices/messageSlice";
+import { RootState } from "@/store/store";
 
 interface AuthInputProps {
   title: string;
@@ -23,6 +24,7 @@ interface AuthInputProps {
 
 const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
   const dispatch = useDispatch();
+  const lang = useSelector((state: RootState) => state.settings.language);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -67,7 +69,7 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     setText(value);
 
     // 유효성 검사
-    const message = checkValidation(field, value, setIsError);
+    const message = checkValidation(field, value, setIsError, lang);
     // 메시지가 없는 경우
     if (!message) {
       dispatch(updateField({ field: field as keyof SignupState, value }));
