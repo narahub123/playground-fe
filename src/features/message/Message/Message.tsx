@@ -10,7 +10,7 @@ import styles from "./Message.module.css";
 import { MessageType } from "@/types";
 import { useDispatch } from "react-redux";
 import { deleteMessage } from "@/store/slices/messageSlice";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { CONSTANT } from "@/constants";
 
 interface MessageProps {
@@ -22,7 +22,6 @@ const Message = ({ message, index }: MessageProps) => {
   const dispatch = useDispatch();
   const msgRef = useRef<HTMLDivElement>(null);
   const { status, text } = message;
-  const [timer, setTimer] = useState<number | undefined>(undefined);
 
   // fade in/fade down / fade down 효과
   useEffect(() => {

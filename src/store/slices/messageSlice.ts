@@ -37,6 +37,10 @@ const messageSlice = createSlice({
           text: "내용이 부족합니다.",
         };
       } else {
+        // 가장 최신 메시지와 동일한 메시지인 경우 등록 안하기 
+        if (state.messages[0] && state.messages[0].text === text) {
+          return;
+        }
         // 추가될 새로운 메시지
         newMessage = { status, text };
       }
