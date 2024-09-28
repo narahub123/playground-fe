@@ -1,9 +1,9 @@
 import { LuChevronDown } from "react-icons/lu";
 import styles from "./AuthInput.module.css";
 import { ReactNode, useEffect, useRef, useState } from "react";
-import { AuthInputListType, MessageType } from "@/types";
+import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   BirthType,
   SignupState,
@@ -12,7 +12,6 @@ import {
 import { debounce } from "@/utils";
 import { checkValidation } from "../../utils";
 import { addMessage } from "@/store/slices/messageSlice";
-import { RootState } from "@/store/store";
 
 interface AuthInputProps {
   title: string;

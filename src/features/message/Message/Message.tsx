@@ -10,7 +10,8 @@ import styles from "./Message.module.css";
 import { MessageType } from "@/types";
 import { useDispatch } from "react-redux";
 import { deleteMessage } from "@/store/slices/messageSlice";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CONSTANT } from "@/constants";
 
 interface MessageProps {
   message: MessageType;
@@ -21,6 +22,7 @@ const Message = ({ message, index }: MessageProps) => {
   const dispatch = useDispatch();
   const msgRef = useRef<HTMLDivElement>(null);
   const { status, text } = message;
+  const [timer, setTimer] = useState<number | undefined>(undefined);
 
   // fade in/fade down / fade down 효과
   useEffect(() => {
@@ -52,6 +54,20 @@ const Message = ({ message, index }: MessageProps) => {
       msgRef.current?.removeEventListener("animationend", handleAnimationEnd);
     };
   }, [index, message]);
+
+  useEffect(() => {
+    if (!msgRef.current) return;
+
+    const newTimer = setTimeout(() => {
+      msgRef.current?.classList.add(styles[`fade-out`]);
+
+      setTimeout(() => {
+        dispatch(deleteMessage(index));
+      }, 300);
+    }, CONSTANT.MESSAGE_DURATION * (CONSTANT.MAX_MESSAGES - index));
+
+    return () => clearTimeout(newTimer);
+  }, []);
 
   const statusCond =
     status === "success"
