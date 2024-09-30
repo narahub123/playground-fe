@@ -63,13 +63,14 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
   }, [focused]);
 
   // input 박스 값 입력
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
     setText(value);
 
     // 유효성 검사
-    const message = checkValidation(field, value, setIsError, lang);
+    const message = await checkValidation(field, value, lang, setIsError);
+
     // 메시지가 없는 경우
     if (!message) {
       dispatch(updateField({ field: field as keyof SignupState, value }));
@@ -79,8 +80,12 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     const { status, text } = message;
 
     dispatch(addMessage({ status, text }));
+    // 유효성 검사 통과시 새로운 value 등록
     if (status === "success") {
       dispatch(updateField({ field: field as keyof SignupState, value }));
+      // 유효성 검사 실패시 기존 value 지우기
+    } else if (status === "error") {
+      dispatch(updateField({ field: field as keyof SignupState, value: "" }));
     }
   };
 

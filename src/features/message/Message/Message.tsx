@@ -24,7 +24,7 @@ const Message = ({ message, index }: MessageProps) => {
   const iconRef = useRef<HTMLButtonElement>(null);
   const { status, text } = message;
 
-  // fade in/fade down / fade down 효과
+  // fade in/fade down/fade down 효과
   useEffect(() => {
     if (index === 0) {
       msgRef.current?.classList.add(styles[`fade-in`]);
@@ -55,6 +55,7 @@ const Message = ({ message, index }: MessageProps) => {
     };
   }, [index, message]);
 
+  // fade down 효과
   useEffect(() => {
     if (!msgRef.current) return;
 
@@ -67,12 +68,6 @@ const Message = ({ message, index }: MessageProps) => {
     }, CONSTANT.MESSAGE_DURATION * (CONSTANT.MAX_MESSAGES - index));
 
     return () => clearTimeout(newTimer);
-  }, []);
-
-  useEffect(() => {
-    if (!iconRef.current) return;
-
-    iconRef.current.focus();
   }, []);
 
   const statusCond =

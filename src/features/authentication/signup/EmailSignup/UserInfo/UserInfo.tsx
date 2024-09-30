@@ -5,7 +5,7 @@ import { LuEye } from "react-icons/lu";
 import { signupLists } from "@/data";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface UserInfoProps {
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;

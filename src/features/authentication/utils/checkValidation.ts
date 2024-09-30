@@ -1,12 +1,13 @@
+import { checkExistingEmail } from "@/apis/signup";
 import { AuthRegExList } from "@/data";
 import { langObj } from "@/data/language/language";
 import { MessageType } from "@/types";
 
-export const checkValidation = (
+export const checkValidation = async (
   field: string,
   value: string,
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
-  lang: string
+  lang: string,
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   let message: MessageType | undefined = undefined;
   let isError = false;
@@ -24,10 +25,23 @@ export const checkValidation = (
 
         isError = true;
       } else {
-        message = {
-          status: "success",
-          text: langObj[lang].message.email_success,
-        };
+        // 기존에 존재하는 이메일인지 확인
+        await checkExistingEmail(value)
+          .then((res) => {
+            console.log(res);
+            message = {
+              status: "success",
+              text: langObj[lang].message.email_success,
+            };
+          })
+          .catch((err) => {
+            message = {
+              status: "error",
+              text: err.message,
+            };
+
+            isError = true;
+          });
       }
       break;
 
