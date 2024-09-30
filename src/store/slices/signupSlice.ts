@@ -13,7 +13,7 @@ export interface BirthType {
 
 export interface SignupState {
   ip: string;
-  address: AddressType;
+  location: AddressType;
   username: string;
   gender: string;
   email: string;
@@ -22,7 +22,7 @@ export interface SignupState {
 
 const initialState: SignupState = {
   ip: "",
-  address: {
+  location: {
     lat: "",
     lng: "",
   },
@@ -53,11 +53,11 @@ const signupSlice = createSlice({
     ) => {
       const { field, value } = action.payload;
 
-      if (field === "address") {
+      if (field === "location") {
         if (typeof value === "object" && value !== null) {
           const { lat, lng } = value as AddressType;
-          state.address.lat = lat;
-          state.address.lng = lng;
+          state.location.lat = lat;
+          state.location.lng = lng;
         }
       } else if (field === "birth") {
         if (typeof value === "object" && value !== null) {

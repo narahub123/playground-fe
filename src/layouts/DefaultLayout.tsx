@@ -46,7 +46,7 @@ const DefaultLayout = () => {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
 
-      dispatch(updateField({ field: "address", value: { lat, lng } }));
+      dispatch(updateField({ field: "location", value: { lat, lng } }));
     };
 
     // 에러 모달이 완성되면 적용할 것
