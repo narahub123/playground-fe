@@ -5,6 +5,7 @@ import { useFocusTrap } from "@/hooks";
 import UserInfo from "./EmailSignup/UserInfo/UserInfo";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import Password from "./password/Password";
 
 const Signup = () => {
   const [step, setStep] = useState("userInfo");
@@ -65,7 +66,7 @@ const Signup = () => {
           )}
         >
           {(setIsValid) => (
-            <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
+            <Password setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
       ) : undefined}

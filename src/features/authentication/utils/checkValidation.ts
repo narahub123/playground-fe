@@ -1,4 +1,5 @@
 import { checkExistingEmail } from "@/apis/signup";
+import { CONSTANT } from "@/constants";
 import { AuthRegExList } from "@/data";
 import { langObj } from "@/data/language/language";
 import { MessageType } from "@/types";
@@ -49,7 +50,57 @@ export const checkValidation = async (
           });
       }
       break;
+    case "password":
+    case "password_confirm":
+      if (
+        value.length > 30 ||
+        value.length < 8 ||
+        !AuthRegExList.password.alphabet.test(value) ||
+        !AuthRegExList.password.number.test(value) ||
+        !AuthRegExList.password.char.test(value)
+      ) {
+        if (!AuthRegExList.password.alphabet.test(value)) {
+          message = {
+            status: "error",
+            text: "적어도 하나 이상의 영문자가 필요합니다.",
+          };
 
+          isError = true;
+        }
+        if (!AuthRegExList.password.number.test(value)) {
+          message = {
+            status: "error",
+            text: "적어도 하나 이상의 숫자가 필요합니다.",
+          };
+          isError = true;
+        }
+        if (!AuthRegExList.password.char.test(value)) {
+          message = {
+            status: "error",
+            text: "적어도 하나 이상의 특수문자가 필요합니다.",
+          };
+          isError = true;
+        }
+        if (
+          value.length > CONSTANT.PASSWORD_MAX ||
+          value.length < CONSTANT.PASSWORD_MIN
+        ) {
+          message = {
+            status: "error",
+            text: `${CONSTANT.PASSWORD_MIN}자 이상 ${CONSTANT.PASSWORD_MAX}자 이하만 가능합니다.`,
+          };
+          isError = true;
+        }
+      } else {
+        message = {
+          status: "success",
+          text: "사용 가능한 비밀번호입니다.",
+        };
+
+        isError = false;
+      }
+
+      break;
     default:
       console.log("알 수 없는 필드입니다.");
       break;

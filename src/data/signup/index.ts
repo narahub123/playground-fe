@@ -1,3 +1,4 @@
+import { CONSTANT } from "@/constants";
 import { langObj } from "../language/language";
 
 // 성별 선택 목록
@@ -80,6 +81,13 @@ const signupLists = {
 // 인증 유효성 정규 표현식
 const AuthRegExList = {
   email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
+  password: {
+    alphabet: /[A-Za-z]/,
+    number: /\d/,
+    char: /[@$!%*#?&]/,
+    length: `/.{${CONSTANT.PASSWORD_MIN}, ${CONSTANT.PASSWORD_MAX}}/`,
+    total: `/[A-Za-z]\d[@$!%*#?&].{${CONSTANT.PASSWORD_MIN}, ${CONSTANT.PASSWORD_MAX}}/`,
+  },
 };
 
 export { signupLists, AuthRegExList };

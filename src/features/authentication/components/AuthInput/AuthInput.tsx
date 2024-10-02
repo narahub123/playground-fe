@@ -1,6 +1,6 @@
-import { LuChevronDown } from "react-icons/lu";
+import { LuChevronDown, LuEye, LuEyeOff } from "react-icons/lu";
 import styles from "./AuthInput.module.css";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AuthInputListType } from "@/types";
 import AuthInputList from "../AuthInputList/AuthInputList";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,6 @@ interface AuthInputProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   limit?: number; // 최대 입력 가능 글 자 수
   list?: AuthInputListType[]; // 목록
-  extra?: ReactNode; // 추가 기능 삽입
 }
 
 const AuthInput = ({
@@ -29,10 +28,10 @@ const AuthInput = ({
   setLoading,
   limit,
   list,
-  extra,
 }: AuthInputProps) => {
   const dispatch = useDispatch();
   const lang = useSelector((state: RootState) => state.settings.language);
+  const password = useSelector((state: RootState) => state.signup.password);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -43,6 +42,9 @@ const AuthInput = ({
   );
   const [index, setIndex] = useState<number | undefined>(undefined);
   const [isError, setIsError] = useState(false);
+  const [hidden, setHidden] = useState(
+    field === "password" || field === "password_confirm" ? true : false
+  );
 
   // focus 조건
   const focusCond = focused || text !== "" || select ? styles.focused : "";
@@ -94,6 +96,27 @@ const AuthInput = ({
     const { status, text } = message;
 
     dispatch(addMessage({ status, text }));
+
+    if (field === "password_confirm") {
+      if (password !== value) {
+        dispatch(
+          addMessage({
+            status: "error",
+            text: "작성하신 비밀번호와 일치하지 않습니다.",
+          })
+        );
+        setIsError(true);
+      } else {
+        dispatch(
+          addMessage({
+            status: "success",
+            text: "작성하신 비밀번호와 일치합니다.",
+          })
+        );
+        setIsError(false);
+      }
+    }
+
     // 유효성 검사 통과시 새로운 value 등록
     if (status === "success") {
       dispatch(updateField({ field: field as keyof SignupState, value }));
@@ -230,7 +253,7 @@ const AuthInput = ({
             <p>{select?.name}</p>
           ) : (
             <input
-              type="text"
+              type={hidden ? "password" : "text"}
               className={`${styles.input} ${focusCond}`}
               ref={inputRef}
               onBlur={() => {
@@ -242,7 +265,24 @@ const AuthInput = ({
           )}
 
           {/* 간단한 버튼 등을 삽입 가능 */}
-          {extra}
+          {field !== "password" &&
+          field !== "password_confirm" ? undefined : hidden ? (
+            <LuEye
+              className={`icon `}
+              onClick={(e) => {
+                e.stopPropagation();
+                setHidden(false);
+              }}
+            />
+          ) : (
+            <LuEyeOff
+              className={`icon `}
+              onClick={(e) => {
+                e.stopPropagation();
+                setHidden(true);
+              }}
+            />
+          )}
         </div>
       </span>
       {list && (

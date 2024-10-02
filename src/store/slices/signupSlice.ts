@@ -18,6 +18,8 @@ export interface SignupState {
   gender: string;
   email: string;
   birth: BirthType;
+  password: string;
+  password_confirm: string;
 }
 
 const initialState: SignupState = {
@@ -34,6 +36,8 @@ const initialState: SignupState = {
     month: undefined,
     date: undefined,
   },
+  password: "",
+  password_confirm: "",
 };
 
 const signupSlice = createSlice({

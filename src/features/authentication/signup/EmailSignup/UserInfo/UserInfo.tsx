@@ -1,13 +1,12 @@
 import { CONSTANT } from "@/constants";
 import styles from "./UserInfo.module.css";
 import { AuthInput } from "@/features/authentication/components";
-import { LuEye } from "react-icons/lu";
 import { signupLists } from "@/data";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { useEffect } from "react";
 
-interface UserInfoProps {
+export interface UserInfoProps {
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -53,12 +52,7 @@ const UserInfo = ({ setIsValid, setLoading }: UserInfoProps) => {
         />
       </section>
       <section className={styles.field}>
-        <AuthInput
-          title="이메일"
-          field="email"
-          extra={<LuEye className="icon" />}
-          setLoading={setLoading}
-        />
+        <AuthInput title="이메일" field="email" setLoading={setLoading} />
       </section>
       <section className={styles.container}>
         <p className={styles.title}>생년월일</p>

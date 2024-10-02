@@ -5,6 +5,8 @@ const CONSTANT = {
   MAX_USERNAME: 50, // 유저 입력 최대 개수
   MAX_MESSAGES: 6, // 메시지 최대 개수 + 1
   MESSAGE_DURATION: 4000, // 메시지 지속 시간
+  PASSWORD_MIN: 8,
+  PASSWORD_MAX: 30,
 };
 
 export { CONSTANT };
