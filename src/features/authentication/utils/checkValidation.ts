@@ -16,7 +16,7 @@ export const checkValidation = async (
   if (value === "") return;
 
   switch (field) {
-    case "username":
+    case "name":
       break;
     case "email":
       if (!AuthRegExList.email.test(value)) {
@@ -95,6 +95,52 @@ export const checkValidation = async (
         message = {
           status: "success",
           text: "사용 가능한 비밀번호입니다.",
+        };
+
+        isError = false;
+      }
+
+      break;
+    case "id":
+      if (
+        value.length < CONSTANT.MIN_USERID ||
+        value.length > CONSTANT.MAX_USERID ||
+        !AuthRegExList.userId.letter.test(value) ||
+        !AuthRegExList.userId.required.test(value)
+      ) {
+        if (
+          value.length < CONSTANT.MIN_USERID ||
+          value.length > CONSTANT.MAX_USERID
+        ) {
+          message = {
+            status: "error",
+            text: "아이디는 4자 이상 20자 이하로 작성해주세요",
+          };
+
+          isError = true;
+          break;
+        }
+
+        if (!AuthRegExList.userId.letter.test(value)) {
+          message = {
+            status: "error",
+            text: "아이디는 영어와 숫자 조합만 가능합니다.",
+          };
+          isError = true;
+          break;
+        }
+        if (!AuthRegExList.userId.required.test(value)) {
+          message = {
+            status: "error",
+            text: "영어와 숫자가 각각 하나 이상 필요합니다.",
+          };
+          isError = true;
+          break;
+        }
+      } else {
+        message = {
+          status: "success",
+          text: "사용가능한 아이디입니다.",
         };
 
         isError = false;

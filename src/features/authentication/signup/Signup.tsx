@@ -8,9 +8,10 @@ import { RootState } from "@/store/store";
 import { langObj } from "@/data/language/language";
 import Password from "./EmailSignup/password/Password";
 import ProfileImage from "./EmailSignup/profileImage/ProfileImage";
+import UserId from "./EmailSignup/userId/UserId";
 
 const Signup = () => {
-  const [step, setStep] = useState("profileImage");
+  const [step, setStep] = useState("userId");
   const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -66,13 +67,32 @@ const Signup = () => {
               color="cornflowerblue"
               ref={buttonRef}
               isValid={isValid}
-              next="profileImage"
+              next="userId"
               setStep={setStep}
             />
           )}
         >
           {(setIsValid) => (
             <Password setIsValid={setIsValid} setLoading={setLoading} />
+          )}
+        </ModalLayout>
+      ) : step === "userId" ? (
+        <ModalLayout
+          title={langObj[lang].userId.header}
+          button={(isValid) => (
+            <AuthButton
+              imgUrl={""}
+              label={"다음"}
+              color="cornflowerblue"
+              ref={buttonRef}
+              isValid={isValid}
+              next="profileImage"
+              setStep={setStep}
+            />
+          )}
+        >
+          {(setIsValid) => (
+            <UserId setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
       ) : step === "profileImage" ? (

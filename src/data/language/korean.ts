@@ -36,6 +36,10 @@ export const korean = {
     title: "비밀번호",
     title2: "비밀번호 확인",
   },
+  userId: {
+    header: "유저 아이디를 생성해주세요",
+    title: "사용자 아이디",
+  },
   profileImage: {
     header: "프로필 사진을 선택해주세요",
     label: "프로필 이미지 변경",

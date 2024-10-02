@@ -88,6 +88,11 @@ const AuthRegExList = {
     length: `/.{${CONSTANT.PASSWORD_MIN}, ${CONSTANT.PASSWORD_MAX}}/`,
     total: `/[A-Za-z]\d[@$!%*#?&].{${CONSTANT.PASSWORD_MIN}, ${CONSTANT.PASSWORD_MAX}}/`,
   },
+  userId: {
+    length: `/.{${CONSTANT.MIN_USERID}, ${CONSTANT.MAX_USERID}}/`,
+    letter: /^[A-Za-z0-9]+$/,
+    required: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+$/,
+  },
 };
 
 export { signupLists, AuthRegExList };

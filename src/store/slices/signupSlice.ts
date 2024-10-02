@@ -14,13 +14,14 @@ export interface BirthType {
 export interface SignupState {
   ip: string;
   location: AddressType;
-  username: string;
+  name: string;
   gender: string;
   email: string;
   birth: BirthType;
   password: string;
   password_confirm: string;
   photo: string;
+  id: string;
 }
 
 const initialState: SignupState = {
@@ -29,7 +30,7 @@ const initialState: SignupState = {
     lat: "",
     lng: "",
   },
-  username: "",
+  name: "",
   gender: "",
   email: "",
   birth: {
@@ -40,6 +41,7 @@ const initialState: SignupState = {
   password: "",
   password_confirm: "",
   photo: "",
+  id: "",
 };
 
 const signupSlice = createSlice({
