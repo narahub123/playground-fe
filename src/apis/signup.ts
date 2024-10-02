@@ -25,3 +25,29 @@ export const checkExistingEmail = async (email: string) => {
     throw error;
   }
 };
+
+export const checkExistingId = async (id: string) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/checkExistingId`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      console.log(errorData);
+
+      throw new Error(errorData.message);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

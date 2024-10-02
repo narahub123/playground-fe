@@ -1,4 +1,4 @@
-import { checkExistingEmail } from "@/apis/signup";
+import { checkExistingEmail, checkExistingId } from "@/apis/signup";
 import { CONSTANT } from "@/constants";
 import { AuthRegExList } from "@/data";
 import { langObj } from "@/data/language/language";
@@ -138,12 +138,23 @@ export const checkValidation = async (
           break;
         }
       } else {
-        message = {
-          status: "success",
-          text: "사용가능한 아이디입니다.",
-        };
-
-        isError = false;
+        await checkExistingId(value)
+          .then((res) => {
+            console.log(res);
+            message = {
+              status: "success",
+              text: "사용가능한 아이디입니다.",
+            };
+            isError = false;
+          })
+          .catch((err) => {
+            console.log(err);
+            message = {
+              status: "error",
+              text: err.message,
+            };
+            isError = true;
+          });
       }
 
       break;

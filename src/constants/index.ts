@@ -8,7 +8,7 @@ const CONSTANT = {
   PASSWORD_MIN: 8,
   PASSWORD_MAX: 30,
   MIN_USERID: 4,
-  MAX_USERID: 20,
+  MAX_USERID: 30,
 };
 
 export { CONSTANT };
