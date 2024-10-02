@@ -46,4 +46,17 @@ export const japanese = {
     alt: "プロフィール画像",
     btn: "デフォルト画像に設定",
   },
+  alarm: {
+    header: "通知を設定してください。",
+    message: "メッセージ",
+    mdetail: "新しいメッセージを受け取ると通知を受け取ります。",
+    comment: "コメント",
+    cdetail: "新しいコメントがあると通知を受け取ります。",
+    following: "フォロー",
+    fdetail: "新しいフォロワーがいると通知を受け取ります。",
+    newpost: "新しい投稿",
+    ndetail: "フォロワーが新しい投稿をすると通知を受け取ります。",
+    check: "通知を有効にする",
+    uncheck: "通知を無効にする",
+  },
 };

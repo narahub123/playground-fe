@@ -47,4 +47,17 @@ export const english = {
     alt: "Profile image",
     btn: "Set to default image",
   },
+  alarm: {
+    header: "Set up notifications.",
+    message: "Message",
+    mdetail: "Receive notifications for new messages.",
+    comment: "Comment",
+    cdetail: "Receive notifications for new comments.",
+    following: "Following",
+    fdetail: "Receive notifications for new followers.",
+    newpost: "New Post",
+    ndetail: "Receive notifications for new posts from followers.",
+    check: "Enable notifications",
+    uncheck: "Disable notifications",
+  },
 };

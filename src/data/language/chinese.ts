@@ -46,4 +46,17 @@ export const chinese = {
     alt: "个人资料图片",
     btn: "设为默认图片",
   },
+  alarm: {
+    header: "设置通知。",
+    message: "消息",
+    mdetail: "收到新消息时会收到通知。",
+    comment: "评论",
+    cdetail: "收到新评论时会收到通知。",
+    following: "关注",
+    fdetail: "收到新的关注时会收到通知。",
+    newpost: "新帖子",
+    ndetail: "关注者发布新帖子时会收到通知。",
+    check: "启用通知",
+    uncheck: "禁用通知",
+  },
 };

@@ -46,4 +46,17 @@ export const korean = {
     alt: "프로필 이미지",
     btn: "기본 이미지로",
   },
+  alarm: {
+    header: "알림을 설정해주세요.",
+    message: "메시지",
+    mdetail: "새로운 메시지를 받는 경우 알림을 받습니다.",
+    comment: "댓글",
+    cdetail: "새로운 댓글이 있는 경우 알림을 받습니다.",
+    following: "팔로잉",
+    fdetail: "새로운 팔로잉이 있는 경우 알림을 받습니다.",
+    newpost: "새 글",
+    ndetail: "팔로어 중 새 글이 있는 경우 알림을 받습니다.",
+    check: "알림 설정",
+    uncheck: "알림 해제",
+  },
 };

@@ -10,6 +10,12 @@ export interface BirthType {
   month?: number;
   date?: number;
 }
+export interface AlarmType {
+  message: boolean;
+  comment: boolean;
+  following: boolean;
+  newpost: boolean;
+}
 
 export interface SignupState {
   ip: string;
@@ -22,6 +28,7 @@ export interface SignupState {
   password_confirm: string;
   photo: string;
   id: string;
+  alarm: AlarmType;
 }
 
 const initialState: SignupState = {
@@ -42,6 +49,12 @@ const initialState: SignupState = {
   password_confirm: "",
   photo: "",
   id: "",
+  alarm: {
+    message: false,
+    comment: false,
+    following: false,
+    newpost: false,
+  },
 };
 
 const signupSlice = createSlice({
@@ -56,7 +69,7 @@ const signupSlice = createSlice({
       state,
       action: PayloadAction<{
         field: keyof SignupState;
-        value: string | AddressType | BirthType;
+        value: string | AddressType | BirthType | AlarmType;
       }>
     ) => {
       const { field, value } = action.payload;
@@ -72,6 +85,13 @@ const signupSlice = createSlice({
           state.birth = {
             ...state.birth,
             ...(action.payload.value as BirthType),
+          };
+        }
+      } else if (field === "alarm") {
+        if (typeof value === "object" && value !== null) {
+          state.alarm = {
+            ...state.alarm,
+            ...(action.payload.value as AlarmType),
           };
         }
       } else {

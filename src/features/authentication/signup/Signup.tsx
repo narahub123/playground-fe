@@ -9,9 +9,10 @@ import { langObj } from "@/data/language/language";
 import Password from "./EmailSignup/password/Password";
 import ProfileImage from "./EmailSignup/profileImage/ProfileImage";
 import UserId from "./EmailSignup/userId/UserId";
+import Alarm from "./EmailSignup/alarm/Alarm";
 
 const Signup = () => {
-  const [step, setStep] = useState("userId");
+  const [step, setStep] = useState("alarm");
   const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -105,13 +106,32 @@ const Signup = () => {
               color="cornflowerblue"
               ref={buttonRef}
               isValid={isValid}
-              next="profileImage"
+              next="alarm"
               setStep={setStep}
             />
           )}
         >
           {(setIsValid) => (
             <ProfileImage setIsValid={setIsValid} setLoading={setLoading} />
+          )}
+        </ModalLayout>
+      ) : step === "alarm" ? (
+        <ModalLayout
+          title={langObj[lang].alarm.header}
+          button={(isValid) => (
+            <AuthButton
+              imgUrl={""}
+              label={"다음"}
+              color="cornflowerblue"
+              ref={buttonRef}
+              isValid={isValid}
+              next="language"
+              setStep={setStep}
+            />
+          )}
+        >
+          {(setIsValid) => (
+            <Alarm setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
       ) : undefined}

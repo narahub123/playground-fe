@@ -13,32 +13,25 @@ export interface UserInfoProps {
 
 const UserInfo = ({ setIsValid, setLoading }: UserInfoProps) => {
   const lang = useSelector((state: RootState) => state.settings.language);
-  const { username, gender, email, birth } = useSelector(
+  const { name, gender, email, birth } = useSelector(
     (state: RootState) => state.signup
   );
 
   // 존재 여부에 대한 유효성 검사
   useEffect(() => {
-    if (
-      username &&
-      gender &&
-      email &&
-      birth.year &&
-      birth.month &&
-      birth.date
-    ) {
+    if (name && gender && email && birth.year && birth.month && birth.date) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-  }, [username, gender, email, birth]);
+  }, [name, gender, email, birth]);
 
   return (
     <div className={styles.wrapper}>
       <section className={styles.field}>
         <AuthInput
           title="이름"
-          field="username"
+          field="name"
           limit={CONSTANT.MAX_USERNAME}
           setLoading={setLoading}
         />

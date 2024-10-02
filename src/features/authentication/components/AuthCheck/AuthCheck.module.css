@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.title {
+  font-weight: bold;
+}
+.detail {
+  font-size: 12px; 
+}
+.checkbox {
+  font-size: 20px;
+  color: var(--point-color);
+}
