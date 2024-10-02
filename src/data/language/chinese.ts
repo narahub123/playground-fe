@@ -36,6 +36,10 @@ export const chinese = {
     title: "密码",
     title2: "确认密码",
   },
+  userId: {
+    header: "创建用户ID",
+    title: "用户ID",
+  },
   profileImage: {
     header: "请选择个人资料照片",
     label: "更改个人资料图片",

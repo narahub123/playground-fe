@@ -31,6 +31,11 @@ export const english = {
     email_success: "The email format is valid.",
     email_error: "The email format is invalid.",
   },
+  userId: {
+    header: "Create a User ID",
+    title: "User ID",
+  },
+
   password: {
     header: "Please create a password",
     title: "Password",

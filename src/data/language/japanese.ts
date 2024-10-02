@@ -31,6 +31,10 @@ export const japanese = {
     email_success: "有効なメール形式です。",
     email_error: "無効なメール形式です。",
   },
+  userId: {
+    header: "ユーザーIDを作成してください",
+    title: "ユーザーID",
+  },
   password: {
     header: "パスワードを作成してください",
     title: "パスワード",

@@ -63,7 +63,7 @@ const AuthButton = forwardRef<HTMLElement, AuthButtonProps>(
         }}
         onMouseEnter={() => handleMouseEnter()}
         onMouseLeave={() => handleMouseLeave()}
-        onClick={() => handleClick()}
+        onClick={isValid ? () => handleClick() : undefined}
         ref={ref as React.RefObject<HTMLButtonElement>}
       >
         {imgUrl && (
