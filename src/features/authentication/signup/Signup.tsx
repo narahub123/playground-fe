@@ -5,8 +5,9 @@ import { useDocumentTitle, useFocusTrap } from "@/hooks";
 import UserInfo from "./EmailSignup/UserInfo/UserInfo";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import Password from "./password/Password";
 import { langObj } from "@/data/language/language";
+import Password from "./EmailSignup/password/Password";
+import ProfileImage from "./EmailSignup/profileImage/ProfileImage";
 
 const Signup = () => {
   const [step, setStep] = useState("userInfo");
@@ -65,7 +66,26 @@ const Signup = () => {
               color="cornflowerblue"
               ref={buttonRef}
               isValid={isValid}
-              next="password"
+              next="profileImage"
+              setStep={setStep}
+            />
+          )}
+        >
+          {(setIsValid) => (
+            <Password setIsValid={setIsValid} setLoading={setLoading} />
+          )}
+        </ModalLayout>
+      ) : step === "profileImage" ? (
+        <ModalLayout
+          title={langObj[lang].password.header}
+          button={(isValid) => (
+            <AuthButton
+              imgUrl={""}
+              label={"다음"}
+              color="cornflowerblue"
+              ref={buttonRef}
+              isValid={isValid}
+              next="profileImage"
               setStep={setStep}
             />
           )}

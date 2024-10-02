@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { UserInfoProps } from "../EmailSignup/UserInfo/UserInfo";
 import styles from "./Password.module.css";
 import { RootState } from "@/store/store";
-import { AuthInput } from "../../components";
 import { useEffect } from "react";
 import { langObj } from "@/data/language/language";
+import { UserInfoProps } from "../UserInfo/UserInfo";
+import { AuthInput } from "@/features/authentication/components";
 
 const Password = ({ setIsValid, setLoading }: UserInfoProps) => {
   const lang = useSelector((state: RootState) => state.settings.language);
