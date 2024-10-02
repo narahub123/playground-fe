@@ -8,11 +8,22 @@ interface AuthButtonProps {
   backgroundColor?: string;
   color?: string;
   hoverBackgroundColor?: string;
+  next?: string;
+  setStep?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const AuthButton = forwardRef<HTMLElement, AuthButtonProps>(
   (
-    { imgUrl, label, isValid, backgroundColor, color, hoverBackgroundColor },
+    {
+      imgUrl,
+      label,
+      isValid,
+      backgroundColor,
+      color,
+      hoverBackgroundColor,
+      next,
+      setStep,
+    },
     ref
   ) => {
     const [isHover, setIsHover] = useState(false);
@@ -38,6 +49,11 @@ const AuthButton = forwardRef<HTMLElement, AuthButtonProps>(
       setIsHover(false);
     };
 
+    const handleClick = () => {
+      if (next && setStep) {
+        setStep(next);
+      }
+    };
     return (
       <button
         className={`auth-button ${validCond}`}
@@ -47,6 +63,7 @@ const AuthButton = forwardRef<HTMLElement, AuthButtonProps>(
         }}
         onMouseEnter={() => handleMouseEnter()}
         onMouseLeave={() => handleMouseLeave()}
+        onClick={() => handleClick()}
         ref={ref as React.RefObject<HTMLButtonElement>}
       >
         {imgUrl && (

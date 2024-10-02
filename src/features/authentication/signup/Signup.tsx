@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const Signup = () => {
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState("userInfo");
   const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -26,23 +26,51 @@ const Signup = () => {
     };
   }, [setLastFocusable]);
 
+  console.log(step);
+
   return (
-    <ModalLayout
-      title="계정을 생성하세요"
-      button={(isValid) => (
-        <AuthButton
-          imgUrl={""}
-          label={"다음"}
-          color="cornflowerblue"
-          ref={buttonRef}
-          isValid={isValid}
-        />
+    <>
+      {step === "userInfo" && (
+        <ModalLayout
+          title="계정을 생성하세요"
+          button={(isValid) => (
+            <AuthButton
+              imgUrl={""}
+              label={"다음"}
+              color="cornflowerblue"
+              ref={buttonRef}
+              isValid={isValid}
+              next="password"
+              setStep={setStep}
+            />
+          )}
+        >
+          {(setIsValid) => (
+            <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
+          )}
+        </ModalLayout>
       )}
-    >
-      {(setIsValid) => (
-        <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
+      {step === "password" && (
+        <ModalLayout
+          title="비밀번호를 작성해주세요."
+          button={(isValid) => (
+            <AuthButton
+              imgUrl={""}
+              label={"다음"}
+              color="cornflowerblue"
+              ref={buttonRef}
+              isValid={isValid}
+              next="password"
+              setStep={setStep}
+            />
+          )}
+        >
+          {(setIsValid) => (
+            <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
+          )}
+        </ModalLayout>
       )}
-    </ModalLayout>
+    </>
   );
 };
 
