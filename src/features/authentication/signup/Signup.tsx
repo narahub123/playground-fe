@@ -8,6 +8,7 @@ import { RootState } from "@/store/store";
 
 const Signup = () => {
   const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -38,7 +39,9 @@ const Signup = () => {
         />
       )}
     >
-      {(setIsValid) => <UserInfo setIsValid={setIsValid} />}
+      {(setIsValid) => (
+        <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
+      )}
     </ModalLayout>
   );
 };

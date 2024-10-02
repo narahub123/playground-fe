@@ -7,7 +7,8 @@ export const checkValidation = async (
   field: string,
   value: string,
   lang: string,
-  setIsError: React.Dispatch<React.SetStateAction<boolean>>
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   let message: MessageType | undefined = undefined;
   let isError = false;
@@ -25,6 +26,7 @@ export const checkValidation = async (
 
         isError = true;
       } else {
+        setLoading(true);
         // 기존에 존재하는 이메일인지 확인
         await checkExistingEmail(value)
           .then((res) => {
@@ -41,6 +43,9 @@ export const checkValidation = async (
             };
 
             isError = true;
+          })
+          .finally(() => {
+            setLoading(false);
           });
       }
       break;

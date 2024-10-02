@@ -17,12 +17,20 @@ import { RootState } from "@/store/store";
 interface AuthInputProps {
   title: string;
   field: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   limit?: number; // 최대 입력 가능 글 자 수
   list?: AuthInputListType[]; // 목록
   extra?: ReactNode; // 추가 기능 삽입
 }
 
-const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
+const AuthInput = ({
+  title,
+  field,
+  setLoading,
+  limit,
+  list,
+  extra,
+}: AuthInputProps) => {
   const dispatch = useDispatch();
   const lang = useSelector((state: RootState) => state.settings.language);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -69,7 +77,13 @@ const AuthInput = ({ title, field, limit, list, extra }: AuthInputProps) => {
     setText(value);
 
     // 유효성 검사
-    const message = await checkValidation(field, value, lang, setIsError);
+    const message = await checkValidation(
+      field,
+      value,
+      lang,
+      setIsError,
+      setLoading
+    );
 
     // 메시지가 없는 경우
     if (!message) {

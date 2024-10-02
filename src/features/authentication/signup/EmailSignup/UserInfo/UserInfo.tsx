@@ -9,9 +9,10 @@ import { useEffect } from "react";
 
 interface UserInfoProps {
   setIsValid: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserInfo = ({ setIsValid }: UserInfoProps) => {
+const UserInfo = ({ setIsValid, setLoading }: UserInfoProps) => {
   const lang = useSelector((state: RootState) => state.settings.language);
   const { username, gender, email, birth } = useSelector(
     (state: RootState) => state.signup
@@ -40,16 +41,23 @@ const UserInfo = ({ setIsValid }: UserInfoProps) => {
           title="이름"
           field="username"
           limit={CONSTANT.MAX_USERNAME}
+          setLoading={setLoading}
         />
       </section>
       <section className={styles.field}>
-        <AuthInput title="성별" field="gender" list={signupLists.genderList} />
+        <AuthInput
+          title="성별"
+          field="gender"
+          list={signupLists.genderList}
+          setLoading={setLoading}
+        />
       </section>
       <section className={styles.field}>
         <AuthInput
           title="이메일"
           field="email"
           extra={<LuEye className="icon" />}
+          setLoading={setLoading}
         />
       </section>
       <section className={styles.container}>
@@ -64,6 +72,7 @@ const UserInfo = ({ setIsValid }: UserInfoProps) => {
               title="년"
               field="year"
               list={signupLists.calendarList.yearList}
+              setLoading={setLoading}
             />
           </span>
           <span className={styles.field}>
@@ -71,6 +80,7 @@ const UserInfo = ({ setIsValid }: UserInfoProps) => {
               title="월"
               field="month"
               list={signupLists.calendarList.monthList(lang)}
+              setLoading={setLoading}
             />
           </span>
           <span className={styles.field}>
@@ -79,6 +89,7 @@ const UserInfo = ({ setIsValid }: UserInfoProps) => {
               title="일"
               field="date"
               list={signupLists.calendarList.dateList()}
+              setLoading={setLoading}
             />
           </span>
         </div>
