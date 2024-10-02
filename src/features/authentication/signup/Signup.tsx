@@ -30,7 +30,7 @@ const Signup = () => {
 
   return (
     <>
-      {step === "userInfo" && (
+      {step === "userInfo" ? (
         <ModalLayout
           title="계정을 생성하세요"
           button={(isValid) => (
@@ -49,8 +49,7 @@ const Signup = () => {
             <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
-      )}
-      {step === "password" && (
+      ) : step === "password" ? (
         <ModalLayout
           title="비밀번호를 작성해주세요."
           button={(isValid) => (
@@ -69,7 +68,7 @@ const Signup = () => {
             <UserInfo setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
-      )}
+      ) : undefined}
     </>
   );
 };
