@@ -24,8 +24,16 @@ export const english = {
     11: "Nov",
     12: "Dec",
   },
+  signup: {
+    head: "Sign Up / PlayGround",
+  },
   message: {
     email_success: "The email format is valid.",
     email_error: "The email format is invalid.",
+  },
+  password: {
+    header: "Please create a password",
+    title: "Password",
+    title2: "Confirm Password",
   },
 };

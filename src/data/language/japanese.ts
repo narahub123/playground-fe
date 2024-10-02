@@ -24,8 +24,16 @@ export const japanese = {
     11: "11月",
     12: "12月",
   },
+  signup: {
+    head: "サインアップ / PlayGround",
+  },
   message: {
     email_success: "有効なメール形式です。",
     email_error: "無効なメール形式です。",
+  },
+  password: {
+    header: "パスワードを作成してください",
+    title: "パスワード",
+    title2: "パスワードの確認",
   },
 };

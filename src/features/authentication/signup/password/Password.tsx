@@ -4,6 +4,7 @@ import styles from "./Password.module.css";
 import { RootState } from "@/store/store";
 import { AuthInput } from "../../components";
 import { useEffect } from "react";
+import { langObj } from "@/data/language/language";
 
 const Password = ({ setIsValid, setLoading }: UserInfoProps) => {
   const lang = useSelector((state: RootState) => state.settings.language);
@@ -21,9 +22,13 @@ const Password = ({ setIsValid, setLoading }: UserInfoProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <AuthInput title="비밀번호" field="password" setLoading={setLoading} />
       <AuthInput
-        title="비밀번호 확인"
+        title={langObj[lang].password.title}
+        field="password"
+        setLoading={setLoading}
+      />
+      <AuthInput
+        title={langObj[lang].password.title2}
         field="password_confirm"
         setLoading={setLoading}
       />

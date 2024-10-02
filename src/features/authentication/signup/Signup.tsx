@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { ModalLayout } from "@/layouts";
 import { AuthButton } from "@/components";
-import { useFocusTrap } from "@/hooks";
+import { useDocumentTitle, useFocusTrap } from "@/hooks";
 import UserInfo from "./EmailSignup/UserInfo/UserInfo";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import Password from "./password/Password";
+import { langObj } from "@/data/language/language";
 
 const Signup = () => {
   const [step, setStep] = useState("userInfo");
   const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const lang = useSelector((state: RootState) => state.settings.language);
+  const langText = langObj[lang as string].signup.head;
+
+  useDocumentTitle(langText);
 
   // 값 확인 위한 변수 삭제 예정
   const signup = useSelector((state: RootState) => state.signup);
@@ -52,7 +57,7 @@ const Signup = () => {
         </ModalLayout>
       ) : step === "password" ? (
         <ModalLayout
-          title="비밀번호를 작성해주세요."
+          title={langObj[lang].password.header}
           button={(isValid) => (
             <AuthButton
               imgUrl={""}

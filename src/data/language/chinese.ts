@@ -24,8 +24,16 @@ export const chinese = {
     11: "11月",
     12: "12月",
   },
+  signup: {
+    head: "注册 / PlayGround",
+  },
   message: {
     email_success: "邮箱格式有效。",
     email_error: "邮箱格式无效。",
+  },
+  password: {
+    header: "请创建一个密码",
+    title: "密码",
+    title2: "确认密码",
   },
 };

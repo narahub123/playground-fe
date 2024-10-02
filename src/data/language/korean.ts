@@ -28,4 +28,12 @@ export const korean = {
     email_success: "유효한 이메일 형식입니다.",
     email_error: "유효하지 않은 이메일 형식입니다.",
   },
+  signup: {
+    head: "회원가입 / PlayGround",
+  },
+  password: {
+    header: "비밀번호를 작성해주세요",
+    title: "비밀번호",
+    title2: "비밀번호 확인",
+  },
 };
