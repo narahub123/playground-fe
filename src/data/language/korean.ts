@@ -36,4 +36,10 @@ export const korean = {
     title: "비밀번호",
     title2: "비밀번호 확인",
   },
+  profileImage: {
+    header: "프로필 사진을 선택해주세요",
+    label: "프로필 이미지 변경",
+    alt: "프로필 이미지",
+    btn: "기본 이미지로",
+  },
 };

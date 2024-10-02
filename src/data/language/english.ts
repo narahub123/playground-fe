@@ -36,4 +36,10 @@ export const english = {
     title: "Password",
     title2: "Confirm Password",
   },
+  profileImage: {
+    header: "Please select a profile photo",
+    label: "Change profile image",
+    alt: "Profile image",
+    btn: "Set to default image",
+  },
 };

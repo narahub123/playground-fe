@@ -10,7 +10,7 @@ import Password from "./EmailSignup/password/Password";
 import ProfileImage from "./EmailSignup/profileImage/ProfileImage";
 
 const Signup = () => {
-  const [step, setStep] = useState("userInfo");
+  const [step, setStep] = useState("profileImage");
   const [loading, setLoading] = useState(false);
   const { setLastFocusable } = useFocusTrap();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -77,7 +77,7 @@ const Signup = () => {
         </ModalLayout>
       ) : step === "profileImage" ? (
         <ModalLayout
-          title={langObj[lang].password.header}
+          title={langObj[lang].profileImage.header}
           button={(isValid) => (
             <AuthButton
               imgUrl={""}
@@ -91,7 +91,7 @@ const Signup = () => {
           )}
         >
           {(setIsValid) => (
-            <Password setIsValid={setIsValid} setLoading={setLoading} />
+            <ProfileImage setIsValid={setIsValid} setLoading={setLoading} />
           )}
         </ModalLayout>
       ) : undefined}

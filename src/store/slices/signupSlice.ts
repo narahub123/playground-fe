@@ -20,6 +20,7 @@ export interface SignupState {
   birth: BirthType;
   password: string;
   password_confirm: string;
+  photo: string;
 }
 
 const initialState: SignupState = {
@@ -38,6 +39,7 @@ const initialState: SignupState = {
   },
   password: "",
   password_confirm: "",
+  photo: "",
 };
 
 const signupSlice = createSlice({

@@ -36,4 +36,10 @@ export const japanese = {
     title: "パスワード",
     title2: "パスワードの確認",
   },
+  profileImage: {
+    header: "プロフィール写真を選択してください",
+    label: "プロフィール画像を変更",
+    alt: "プロフィール画像",
+    btn: "デフォルト画像に設定",
+  },
 };

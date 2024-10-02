@@ -4,6 +4,7 @@ import useContainerFocusTrap from "./useContainerFocusTrap";
 import useFadeInAndOut from "./useFadeInAndOut";
 import useClickOutside from "./useClickOutside";
 import useScrollToCenter from "./useScrollToCenter";
+import useImagePreview from "./useImagePreview";
 
 export {
   useDocumentTitle,
@@ -12,4 +13,5 @@ export {
   useFadeInAndOut,
   useClickOutside,
   useScrollToCenter,
+  useImagePreview,
 };
